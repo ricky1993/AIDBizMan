@@ -1,0 +1,60 @@
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+
+en:
+  devise:
+    confirmations:
+      confirmed: "恭喜你！你的邮件地址已经成功确认."
+      send_instructions: "你将收到确认邮件."
+      send_paranoid_instructions: "你的邮箱地址已存在, 你将收到确认邮件."
+    failure:
+      already_authenticated: "你已经登录."
+      inactive: "帐号未激活."
+      invalid: "帐号或密码不正确"
+      locked: "帐号处于锁定中."
+      last_attempt: "账号被锁定前，还可以再试一次."
+      not_found_in_database: "%{authentication_keys}或密码不存在."
+      timeout: "登录已超时,请重新登录"
+      unauthenticated: "在开始使用系统前你需要登录或注册."
+      unconfirmed: "你必须确认邮箱地址后才能继续."
+    mailer:
+      confirmation_instructions:
+        subject: "账号激活邮件"
+      reset_password_instructions:
+        subject: "重置密码邮件"
+      unlock_instructions:
+        subject: "账号解锁邮件"
+    omniauth_callbacks:
+      failure: "由于\"%{reason}\",%{kind}账号认证失败."
+      success: "%{kind}账号认证成功."
+    passwords:
+      no_token: "你不能访问该页面,请先点击URL链接重置密码后再次尝试."
+      send_instructions: "你将收到密码重置邮件."
+      send_paranoid_instructions: "你的邮箱地址已存在,你将收到密码恢复邮件."
+      updated: "密码修改成功,你已登录."
+      updated_not_active: "密码修改成功."
+    registrations:
+      destroyed: "再见!你的账号已被成功注销."
+      signed_up: "欢迎,你已经成功注册."
+      signed_up_but_inactive: "你已经成功注册,但是帐号未激活."
+      signed_up_but_locked: "你已成功注册,但是你的账号由于被锁定无法登录."
+      signed_up_but_unconfirmed: "一封激活邮件已发送至你的邮箱,请点击链接激活你的账号."
+      update_needs_confirmation: "账号更新成功,但新的邮箱地址需要确认,请查收邮件并点击链接以确认你的新邮箱地址."
+      updated: "你的账号已成功更新."
+    sessions:
+      signed_in: "成功登录"
+      signed_out: "成功退出"
+      already_signed_out: "成功退出"
+    unlocks:
+      send_instructions: "你将收到一封邮件以解锁你的账号."
+      send_paranoid_instructions: "你的账号已存在,你将收到账号解锁邮件."
+      unlocked: "账号解锁成功.请重新登录."
+  errors:
+    messages:
+      already_confirmed: "已激活,请重新登录"
+      confirmation_period_expired: "请在%{period}内确认,重新发送请求"
+      expired: "已失效,请重新发送请求"
+      not_found: "未发现"
+      not_locked: "未锁定"
+      not_saved:
+        one: "1 error prohibited this %{resource} from being saved:"
+        other: "%{count} errors prohibited this %{resource} from being saved:"

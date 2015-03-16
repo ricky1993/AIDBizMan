@@ -1,0 +1,206 @@
+<%= form_for @apply_record, :html => { :class => "form-horizontal apply_record" ,:multipart=>true } do |f| %>
+
+    <% if @apply_record.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@apply_record.errors.count, "error") %> prohibited this apply_record from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @apply_record.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <% if current_user.job == "客服人员" %>
+        <div class="control-group">
+          <%= f.label :申请人姓名, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :personname, :class => 'form-control' %>
+          </div>
+          <%= error_span(@apply_record[:personname]) %>
+        </div>
+        <div class="control-group">
+          <%= f.label :申请人类别, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select :personcategory,['艺术家','藏家','艺术机构'] %>
+          </div>
+          <%= error_span(@apply_record[:personcategory]) %>
+        </div>
+        <div class="control-group">
+          <%= f.label :申请项目, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select :item,['备案','认证'] %>
+          </div>
+          <%= error_span(@apply_record[:item]) %>
+        </div>
+        <div class="control-group">
+          <%= f.label :艺术品类别, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :artcategory, :class => 'form-control' %>
+          </div>
+          <%= error_span(@apply_record[:artcategory]) %>
+        </div>
+        <div class="control-group">
+          <%= f.label :艺术品名称, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :artname, :class => 'form-control' %>
+          </div>
+          <%= error_span(@apply_record[:artname]) %>
+        </div>
+        <div class="control-group">
+          <hr />
+          <p>上传作品图片</p>
+          <div class="controls">
+            <%= f.file_field :image %>
+            <%= f.hidden_field :image_cache %>
+          </div>
+          <%= error_span(@apply_record[:image]) %>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :证件类型, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select :idtype,['身份证','组织机构代码证','营业执照'],  :class => 'form-control' %>
+          </div>
+          <%= error_span(@apply_record[:idtype]) %>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :证件号码, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :idnumber, :class => 'form-control' %>
+          </div>
+          <%= error_span(@apply_record[:idnumber]) %>
+        </div>
+
+        <div class="control-group">
+          <hr />
+          <p>证件图片</p>
+          <div class="controls">
+            <%= f.file_field :idimage %>
+            <%= f.hidden_field :idimage_cache %>
+          </div>
+          <%= error_span(@apply_record[:idimage]) %>
+        </div>
+
+
+
+        <div class="control-group">
+          <%= f.label :操作状态, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select :state, ['申请通过','申请不通过'],include_blank: true,:class => 'form-control' %>
+          </div>
+          <%= error_span(@apply_record[:state]) %>
+        </div>
+        <div class="control-group">
+          <%= f.label :审核意见, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_area :advice, :class => 'form-control' %>
+          </div>
+          <%= error_span(@apply_record[:advice]) %>
+        </div>
+
+   <% end %>
+
+   <% unless current_user.job == "客服人员" %>
+        <% if current_user.job=="作品库管员" %>
+            <div class="control-group">
+              <%= f.label :操作状态, :class => 'control-label' %>
+              <div class="controls">
+                <% if @apply_record.state!="采样完毕" %>
+                    <%= f.select :state,['物品交接中','物品已入库','物品送往备案'] %>
+                <% else %>
+                    <%= f.select :state1,['备案物品归还','物品已出库'] %>
+                <% end %>
+              </div>
+              <%= error_span(@apply_record[:state]) %>
+            </div>
+        <% end %>
+        <% if current_user.job=="作品备案认证人员" %>
+            <% unless @apply_record.state=="物品已入库" %>
+            <div class="control-group">
+              <%= f.label :操作状态, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.select :state,['采样中','采样完毕'] %>
+              </div>
+              <%= error_span(@apply_record[:state]) %>
+            </div>
+                <% end %>
+            <div class="control-group">
+              <hr />
+              <p>上传宏观图片</p>
+              <div class="controls">
+                <%= f.file_field :macroimage %>
+                <%= f.hidden_field :macroimage_cache %>
+              </div>
+              <%= error_span(@apply_record[:state]) %>
+            </div>
+            <div class="control-group">
+              <hr />
+              <p>上传微观图片</p>
+              <div class="controls">
+                <%= f.file_field :microimage %>
+                <%= f.hidden_field :microimage_cache %>
+              </div>
+              <%= error_span(@apply_record[:state]) %>
+            </div>
+            <div class="control-group">
+              <hr />
+              <p>上传二维码结论</p>
+              <div class="controls">
+                <%= f.file_field :qrimage %>
+                <%= f.hidden_field :qrimage_cache %>
+              </div>
+              <%= error_span(@apply_record[:state]) %>
+            </div>
+        <% end %>
+        <% if current_user.job=="草拟与证书发送人员" %>
+            <div class="control-group">
+              <%= f.label :操作状态, :class => 'control-label' %>
+              <div class="controls">
+                <% if @apply_record.isprint=='已打印'&&@apply_record.isissue=='已签发'&&@apply_record.paid=='已缴费' %>
+                    <%= f.select :state,['证书签发完毕'] %>
+                <% else %>
+                    <%= f.select :state,['证书签发中'] %>
+                <% end %>
+              </div>
+              <%= error_span(@apply_record[:state]) %>
+            </div>
+            <div class="control-group">
+              <%= f.label :打印状态, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.select :isprint,['未打印','已打印'] %>
+              </div>
+              <%= error_span(@apply_record[:paid]) %>
+            </div>
+            <div class="control-group">
+              <%= f.label :签发状态, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.select :isissue,['未签发','已签发'] %>
+              </div>
+              <%= error_span(@apply_record[:paid]) %>
+            </div>
+            <div class="control-group">
+              <%= f.label :缴费状态, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.select :paid,['未缴费','已缴费'] %>
+              </div>
+              <%= error_span(@apply_record[:paid]) %>
+            </div>
+        <% end %>
+    <% end %>
+
+    <hr />
+    <br />
+
+
+
+  <%= f.submit "确定", :class => 'btn btn-primary' %>
+  <%= link_to "取消",
+            apply_records_path, :class => 'btn btn-default' %>
+
+<% end %>

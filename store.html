@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "AIDSystem" %></title>
+    <%= csrf_meta_tags %>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <%= stylesheet_link_tag "application", :media => "all" %>
+
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <!-- Size should be 144 x 144 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+
+    <!-- For iPhone with high-resolution Retina display: -->
+    <!-- Size should be 114 x 114 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+
+    <!-- For first- and second-generation iPad: -->
+    <!-- Size should be 72 x 72 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <!-- Size should be 57 x 57 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+
+    <!-- For all other devices -->
+    <!-- Size should be 32 x 32 pixels -->
+    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+
+    <%= javascript_include_tag "application" %>
+</head>
+<body>
+
+
+<% if user_signed_in? %>
+
+
+<div class="navbar-wrapper">
+    <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+    <div class="container">
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="#">AIDSystem</a>
+                <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <% if user_signed_in? %>
+                        <li><%= link_to "主页", apply_records_path,:class => "active"  %></li>
+                        <li><%= link_to "个人中心", edit_user_index_path %></li>
+
+                        <!-- Read about Bootstrap dropdowns at http://twbs.github.com/bootstrap/javascript.html#dropdowns -->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">我的邮箱<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li role="presentation"><%= link_to "收件箱",recieved_index_path %></li>
+                                <li role="presentation"><%= link_to "发件箱",messages_path %></li>
+                            </ul>
+                        </li>
+                        <li><%= link_to "退出", destroy_user_session_path,:method => :delete %></li>
+                        <% end %>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div><!-- /.navbar-inner -->
+        </div><!-- /.navbar -->
+
+    </div> <!-- /.container -->
+</div><!-- /.navbar-wrapper -->
+<% end %>
+
+<% if user_signed_in? %>
+<div class="media-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <%= bootstrap_flash %>
+                <% end %>
+
+                <%= yield %>
+
+                <% if user_signed_in? %>
+            </div>
+            <% if user_signed_in? %>
+            <div class="col-lg-3">
+                <div class="well sidebar-nav">
+                    <h3>提示板</h3>
+                    <% if current_user.job==nil %>
+                    <p><strong>请完善你的个人资料</strong>
+                    <p>
+                        <%= link_to("修改个人资料",{:controller =>'edit_user',:action => 'edit',:name =>current_user.username},:class => "btn btn-default")%></p>
+                    <% else %>
+                    当前用户：<strong class="panel panel-primary"><%= current_user.username %></strong>
+                    <p>用户邮箱：<strong class="panel panel-primary"><%= current_user.email %></strong></p>
+                    <p>职务：<strong class="panel panel-primary"><%= current_user.job %></strong></p>
+                    <% if current_user.admin %>
+                    <p class="text-danger"><strong class="panel panel-primary">你是管理员用户</strong></p>
+                    <% end %>
+                    <% end %>
+                    <% if count>0 %>
+                    <p class="panel panel-primary">您有<%= count %>封邮件未读，请查看收件箱</p>
+                    <% end %>
+                </div><!--/.well -->
+            </div>
+            <% end %><!--/span-->
+        </div><!--/row-->
+
+        <footer>
+            <!--<p>&copy; Company 2015</p> -->
+        </footer>
+    </div><!-- /container -->
+</div>
+<% end %>
+</body>
+</html>

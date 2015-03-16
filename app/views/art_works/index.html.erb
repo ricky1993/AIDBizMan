@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>关联艺术品</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>艺术品名称</th>
+      <th>创作日期</th>
+      <th>创作地点</th>
+      <th>作家</th>
+      <th>所属订单号</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @art_works.each do |art_work| %>
+      <tr>
+        <td><%= art_work.name %></td>
+        <td><%= art_work.date %></td>
+        <td><%= art_work.place %></td>
+        <td><%= art_work.author %></td>
+        <td><%= art_work.apply_record.dingdanhao %></td>
+        <td><%= link_to '详细信息', art_work,:class => 'btn btn-default' %>
+          <% if art_work.apply_record.state=="等待处理" %>
+        <%= link_to '编辑', edit_art_work_path(art_work),:class => 'btn btn-default'  %>
+        <%= link_to '删除', art_work, method: :delete, data: { confirm: 'Are you sure?' } ,:class => 'btn btn-danger' %></td>
+      <% end %>
+          </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @art_works %>
+
+<br>
+
+<% if @art_works.first!=nil %>
+<%= link_to("继续添加",{:controller =>'art_works',:action => 'new',:id =>@art_works.first.apply_record.id} ,:class => "btn btn-primary") %>
+<% else %>
+    <%= link_to "返回主页",apply_records_path,:class => 'btn btn-default' %>
+<% end %>

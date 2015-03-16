@@ -1,0 +1,54 @@
+<h1 class="page-header">添加关联艺术品</h1>
+
+<%= form_for @art_work,:html => { :class => "form-horizontal apply_record" ,:multipart=>true } do |f| %>
+    <% if @art_work.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@art_work.errors.count, "错误") %> 禁止此艺术品被保存:</h2>
+
+          <ul>
+            <% @art_work.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :名称 %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :创作日期 %><br>
+      <%= f.date_select :date %>
+    </div>
+    <div class="field">
+      <%= f.label :创作地点 %><br>
+      <%= f.text_field :place %>
+    </div>
+    <div class="field">
+      <%= f.label :艺术家名称 %><br>
+      <%= f.text_field :author %>
+    </div>
+
+    <div class="controls">
+      <%= f.label :图片 %><br>
+      <%= f.file_field :image %>
+      <%= f.hidden_field :image_cache %>
+    </div>
+
+
+    <div class="field">
+      <%= f.label :作品描述 %><br>
+      <%= f.text_area :describe %>
+    </div>
+
+    <%= f.hidden_field :apply_record_id,:value=>@apply_record.id %>
+
+
+    <div class="actions">
+      <%= f.submit "确认",:class => 'btn btn-default' %>
+      <%= link_to '返回', art_works_path,:class => 'btn btn-default' %>
+    </div>
+<% end %>
+
+

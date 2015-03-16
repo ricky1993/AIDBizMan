@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+<h2 class="page-header">艺术品详情</h2>
+<div class="bg-info">
+<p>
+  <strong>艺术品名称:</strong>
+  <%= @art_work.name %>
+</p>
+
+<p>
+  <strong>创作日期:</strong>
+  <%= @art_work.date %>
+</p>
+
+<p>
+  <strong>创作地点:</strong>
+  <%= @art_work.place %>
+</p>
+
+<p>
+  <strong>艺术家姓名:</strong>
+  <%= @art_work.author %>
+</p>
+
+<p>
+  <strong>图片:</strong>
+  <%= image_tag @art_work.image_url.to_s,:class=>"img-rounded" %>
+</p>
+
+<p>
+  <strong>描述:</strong>
+  <%= @art_work.describe %>
+</p>
+</div>
+<hr />
+
+<% if @art_work.apply_record.state=="等待处理" %>
+<%= link_to '编辑', edit_art_work_path(@art_work),:class =>'btn btn-default'  %> |
+ <% end %>
+<%= link_to("返回",{:controller =>'art_works',:action => 'index',:id =>@art_work.apply_record.id} ,:class => "btn btn-default")%>

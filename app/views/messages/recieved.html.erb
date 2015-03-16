@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>收件箱</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>标题</th>
+    <th>发件人</th>
+    <th>收件人</th>
+    <th>发送日期</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @messages.each do |message| %>
+      <tr>
+        <td><%= message.title %></td>
+        <td><%= message.user %></td>
+        <td><%= message.tousername %></td>
+        <td><%= message.created_at %></td>
+        <td><%= link_to '显示详细内容', message %></td>
+        <td><%= link_to '删除', message, method: :delete, data: { confirm: '确定要删除吗' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '创建新的邮件', new_message_path %>
+

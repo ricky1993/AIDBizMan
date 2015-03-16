@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<div class="page-header">
+<h1>用户中心</h1>
+<h2>个人资料</h2>
+</div>
+<br />
+<table class="table table-striped">
+  <thead class="container">
+  <tr>
+    <th>用户名</th>
+    <th>姓名</th>
+    <th>邮箱</th>
+    <th>手机号码</th>
+    <th>创建时间</th>
+    <th>用户状态</th>
+    <th>是否管理员</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td><%= @user.username %></td>
+        <td><%= @user.realname %></td>
+        <td><%= @user.email %></td>
+        <td><%= @user.phonenumber %></td>
+        <td><%= @user.created_at %></td>
+        <td>正常</td>
+        <td><% if @user.admin %>
+              是
+            <% else %>
+              否
+              <% end %>
+        </td>
+        <td>
+          <%= link_to("编辑",{:controller =>'edit_user',:action => 'edit',:name =>current_user.username},:class => "btn btn-default")%>
+          <%= link_to '修改密码',edit_registration_path(:user) ,:class => "btn btn-default"%></td>
+      </tr>
+  </tbody>
+</table>
+
+
+<div class="page-header"><h2>组织机构和工作职务</h2></div>
+<div class="bg-danger">
+<p>组织机构：AID公司</p>
+<p>职务：<%= @user.job %></p>
+</div>
+
+<div class="page-header"><h2>登录历史</h2></div>
+<div class="bg-danger">
+<p>本次登录时间： <%=@user.current_sign_in_at %></p>
+<p>上次登录时间： <%=@user.last_sign_in_at %></p>
+<p>登录次数： <%=@user.sign_in_count %></p>
+<p>登录ip: <%=@user.current_sign_in_ip %></p>
+</div>
+<br>
+

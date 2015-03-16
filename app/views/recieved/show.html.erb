@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+<h1 class="page-header">邮件详情</h1>
+<div class="bg-success">
+<p>
+  <strong>标题:</strong>
+  <%= @message.title %>
+</p>
+
+<p>
+  <strong>发件人:</strong>
+  <%= User.find(@message.user_id).username %>
+</p>
+
+
+<p>
+  <strong>收件人:</strong>
+  <%= @message.tousername %>
+</p>
+
+<p>
+  <strong>发件日期：</strong>
+  <%= @message.created_at %>
+</p>
+
+<p>
+  <strong>内容:</strong>
+  <%= @message.content.html_safe %>
+</p>
+</div>
+
+<%= link_to '返回我的邮箱', messages_path,:class => 'btn btn-default'%>

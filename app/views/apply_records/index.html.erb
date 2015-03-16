@@ -1,0 +1,199 @@
+<%- model_class = ApplyRecord -%>
+<% unless current_user.admin %>
+<div class="page-header">
+  <% if current_user.job == "客服人员" %>
+      <h1>我的订单</h1>
+  <% else %>
+      <h1>订单详情</h1>
+  <% end %>
+</div>
+
+    <div>
+    <%= form_tag(find_findApply_path,:class=>"form-horizontal",:method => :post,) do %>
+          <div class="row">
+        <div class="col-md-3">订单号：<%= text_field_tag :dingdanhao,nil,placeholder:"请输入订单号"%></div>
+          <div class="col-md-3">申请人姓名：<%= text_field_tag :personname,nil,placeholder:"请输入申请人姓名"%></div>
+            <div class="col-md-3">申请项目：<%= select_tag(:item, options_for_select(['无','备案' ,'认证'], 3)) %></div>
+              <div class="col-md-3">操作状态:<%= select_tag(:state,options_for_select(['无','申请不通过','申请通过','物品交接中' ,'物品已入库','物品送往备案','采样中','采样完毕', '备案物品归还','物品已出库','证书签发中', '证书签发完毕'],11)) %></div>
+        </div>
+          <div class="row">
+            <div class="col-md-3">申请人类别：<%= select_tag(:personcategory,options_for_select(['无','艺术家','藏家' ,'艺术机构'], 4)) %></div>
+              <div class="col-md-3">开始时间：<%= select_date Date.today, prefix: :start_date %></div>
+                <div class="col-md-3">结束时间：<%= select_date Date.today, prefix: :end_date %></div>
+                </div>
+          <br /><br /><%= submit_tag "查找" ,:class => 'btn btn-primary' %>
+    <% end %>
+    <hr />
+    </div>
+
+    <h2 class="page-header">未完成订单</h2>
+ <table class="table table-striped" border="1.0">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:订单号) %></th>
+      <th><%= model_class.human_attribute_name(:申请人姓名) %></th>
+      <th><%= model_class.human_attribute_name(:申请人类别) %></th>
+      <th><%= model_class.human_attribute_name(:申请项目) %></th>
+      <th><%= model_class.human_attribute_name(:艺术品类别) %></th>
+      <th><%= model_class.human_attribute_name(:艺术品名称) %></th>
+      <th><%= model_class.human_attribute_name(:操作状态) %></th>
+      <% if current_user.job=="作品库管员" %>
+          <th><%= model_class.human_attribute_name(:库存状态) %></th>
+      <% end %>
+      <th><%= model_class.human_attribute_name(:订单所属) %></th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @apply_records.each do |apply_record| %>
+      <tr>
+        <td><%= apply_record.dingdanhao %></td>
+        <td><%= apply_record.personname %></td>
+        <td><%= apply_record.personcategory %></td>
+        <td><%= apply_record.item %></td>
+        <td><%= apply_record.artcategory %></td>
+        <td><%= apply_record.artname %></td>
+        <td><%= apply_record.state %></td>
+        <% if current_user.job=="作品库管员" %>
+            <td><%= apply_record.state1 %></td>
+        <% end %>
+        <td><%= apply_record.user %></td>
+        <td>
+          <%= link_to "详细信息", apply_record_path(apply_record),
+                     :class => 'btn btn-default btn-xs' %>
+          <% if (apply_record.state=="等待处理" && current_user.job=="客服人员")||current_user.admin %>
+          <%= link_to "编辑",
+                      edit_apply_record_path(apply_record), :class => 'btn btn-default btn-xs' %>
+          <%= link_to "删除",
+                      apply_record_path(apply_record),                :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '确定删除订单?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+          <% end %>
+          <% if current_user.job!="客服人员" && current_user.job!="草拟与证书发送人员" %>
+              <%= link_to "编辑",
+                          edit_apply_record_path(apply_record), :class => 'btn btn-default btn-xs' %>
+          <% end %>
+          <% if current_user.job=="草拟与证书发送人员" %>
+              <%= link_to "编辑",
+                          edit_apply_record_path(apply_record), :class => 'btn btn-default btn-xs' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+  <div class="pagination"><%= paginate @apply_records%></div>
+ </table>
+
+<% if current_user.job == "客服人员" %>
+    <%= link_to "添加新订单",
+            new_apply_record_path,
+            :class => 'btn btn-primary' %>
+<% end %>
+<% end %>
+
+
+
+<% if current_user.admin %>
+<h1 class="page-header">用户管理</h1>
+<table class="table table-striped" border="1.0">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:用户名) %></th>
+    <th><%= model_class.human_attribute_name(:手机号) %></th>
+    <th><%= model_class.human_attribute_name(:邮箱) %></th>
+    <th><%= model_class.human_attribute_name(:创建时间) %></th>
+    <th><%= model_class.human_attribute_name(:用户状态) %></th>
+    <th><%= model_class.human_attribute_name(:是否管理员) %></th>
+    <th><%= model_class.human_attribute_name(:工作) %></th>
+    <th><%= model_class.human_attribute_name(:操作) %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.username %></td>
+        <td><%= user.phonenumber %></td>
+        <td><%= user.email %></td>
+        <td><%= user.created_at.localtime.to_s(:db) %></td>
+        <td>正常</td>
+        <td><% if user.admin %>
+              是
+              <% else %>
+              否
+              <% end %>
+        </td>
+        <td><%= user.job %></td>
+       <td><%= link_to("编辑",{:controller =>'edit_user',:action => 'edit',:name =>user.username},:class => "btn btn-default")%>
+         <% unless user.admin %>
+           <%= link_to("订单",{:controller=>'edit_user',:action=>'handle',:name=>user.username},:class=>"btn btn-default") %>
+             <% end %>
+       </td>
+
+   <% end %>
+    </tr>
+    </tbody>
+    </table>
+    <%= paginate @users %>
+    <h1 class="page-header">订单管理</h1>
+
+    <div>
+      <%= form_tag(find_findApply_path,:class=>"form-horizontal",:method => :post,) do %>
+          <div class="row">
+            <div class="col-md-3">订单号：<%= text_field_tag :dingdanhao,nil,placeholder:"请输入订单号"%></div>
+            <div class="col-md-3">申请人姓名：<%= text_field_tag :personname,nil,placeholder:"请输入申请人姓名"%></div>
+            <div class="col-md-3">申请项目：<%= select_tag(:item, options_for_select(['无','备案' ,'认证'], 3)) %></div>
+            <div class="col-md-3">操作状态:<%= select_tag(:state,options_for_select(['无','申请不通过','申请通过','物品交接中' ,'物品已入库','物品送往备案','采样中','采样完毕', '备案物品归还','物品已出库','证书签发中', '证书签发完毕'],11)) %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">申请人类别：<%= select_tag(:personcategory,options_for_select(['无','艺术家','藏家' ,'艺术机构'], 4)) %></div>
+            <div class="col-md-3">开始时间：<%= select_date Date.today, prefix: :start_date %></div>
+            <div class="col-md-3">结束时间：<%= select_date Date.today, prefix: :end_date %></div>
+          </div>
+          <br /><br /><%= submit_tag "查找" ,:class => 'btn btn-primary' %>
+      <% end %>
+      <hr />
+    </div>
+
+    <hr />
+    <table class="table table-striped" border="1.0">
+      <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:订单号) %></th>
+        <th><%= model_class.human_attribute_name(:申请人姓名) %></th>
+        <th><%= model_class.human_attribute_name(:申请人类别) %></th>
+        <th><%= model_class.human_attribute_name(:申请项目) %></th>
+        <th><%= model_class.human_attribute_name(:艺术品类别) %></th>
+        <th><%= model_class.human_attribute_name(:艺术品名称) %></th>
+        <th><%= model_class.human_attribute_name(:操作状态) %></th>
+        <th><%= model_class.human_attribute_name(:订单所属) %></th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @apply_records.each do |apply_record| %>
+          <tr>
+            <td><%= apply_record.dingdanhao %></td>
+            <td><%= apply_record.personname %></td>
+            <td><%= apply_record.personcategory %></td>
+            <td><%= apply_record.item %></td>
+            <td><%= apply_record.artcategory %></td>
+            <td><%= apply_record.artname %></td>
+            <td><%= apply_record.state %></td>
+            <td><%= apply_record.user %></td>
+            <td>
+              <%= link_to "详细信息", apply_record_path(apply_record),
+                          :class => 'btn btn-default btn-xs' %>
+              <%= link_to "删除",
+                          apply_record_path(apply_record),                :method => :delete,
+                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '确定删除订单?')) },
+                          :class => 'btn btn-xs btn-danger' %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= paginate @apply_records %>
+
+<% end  %>
+
+

@@ -1,0 +1,72 @@
+
+<body>
+
+<div class="container">
+
+  <div class="masthead">
+    <h3 class="text-muted">AIDSystem</h3>
+    <nav>
+      <ul class="nav nav-justified">
+        <li><%= link_to "主页",welcome_index_path %></li>
+        <li><%= link_to "订单管理" ,new_user_session_path %></li>
+        <li><a href="#">艺术品查询</a></li>
+        <li><a href="#">其他服务</a></li>
+        <li><a href="#">关于AID</a></li>
+        <li><a href="#">联系我们</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+
+    <h2>重发确认邮件指示</h2>
+
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="field">
+          <%= f.label :邮箱地址 %><br />
+          <%= f.email_field :email, autofocus: true %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "重新发送确认邮件",:class=>'btn btn-primary' %>
+        </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-lg-4">
+      <h2>最新动态!</h2>
+      <p class="text-danger">AID系统是一个关于艺术品鉴别与管理的系统,这个系统的作用是管理艺术品鉴别的订单，整个系统由很多部分组成,现在只实现了基本的订单管理的AID系统是一个关于艺术品鉴别与管理的系统,这个系统的作用是管理艺术品鉴别的订单，整个系统由很多部分组成,现在只实现了基本的订单管理的</p>
+      <p><a class="btn btn-primary" href="#" role="button">查看更多 &raquo;</a></p>
+    </div>
+    <div class="col-lg-4">
+      <h2>标题</h2>
+      <p>AID系统是一个关于艺术品鉴别与管理的系统,这个系统的作用是管理艺术品鉴别的订单，整个系统由很多部分组成,现在只实现了基本的订单管理的AID系统是一个关于艺术品鉴别与管理的系统,这个系统的作用是管理艺术品鉴别的订单，整个系统由很多部分组成,现在只实现了基本的订单管理的 </p>
+      <p><a class="btn btn-primary" href="#" role="button">查看更多 &raquo;</a></p>
+    </div>
+    <div class="col-lg-4">
+      <h2>标题</h2>
+      <p>AID系统是一个关于艺术品鉴别与管理的系统,这个系统的作用是管理艺术品鉴别的订单，整个系统由很多部分组成,现在只实现了基本的订单管理的</p>
+      <p><a class="btn btn-primary" href="#" role="button">查看更多 &raquo;</a></p>
+    </div>
+  </div>
+
+  <!-- Site footer -->
+  <footer class="footer">
+    <p>&copy; AIDCompany 2014</p>
+  </footer>
+
+</div> <!-- /container -->
+
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+
+

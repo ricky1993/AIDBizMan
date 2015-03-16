@@ -1,0 +1,126 @@
+<%- model_class = ApplyRecord -%>
+<div class="page-header">
+  <h1>订单详细信息</h1>
+</div>
+
+<div class="bg-info">
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:订单号) %>:</strong></dt>
+  <dd><%= @apply_record.dingdanhao %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:创建日期) %>:</strong></dt>
+  <dd><%= @apply_record.created_at.localtime.to_s(:db) %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:申请人姓名) %>:</strong></dt>
+  <dd><%= @apply_record.personname %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:申请人类别) %>:</strong></dt>
+  <dd><%= @apply_record.personcategory %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:申请项目) %>:</strong></dt>
+  <dd><%= @apply_record.item %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:艺术品类别) %>:</strong></dt>
+  <dd><%= @apply_record.artcategory %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:艺术品名称) %>:</strong></dt>
+  <dd><%= @apply_record.artname %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:入库日期) %>:</strong></dt>
+  <% if @apply_record.intime!=nil %>
+      <dd><%= @apply_record.intime.localtime.to_s(:db) %></dd>
+  <% else %>
+      <dd><%= @apply_record.intime %></dd>
+  <% end %>
+
+
+  <% if @apply_record.state=="申请不通过" %>
+      <dt><strong><%= model_class.human_attribute_name(:申请不通过日期) %>:</strong></dt>
+  <% else %>
+      <dt><strong><%= model_class.human_attribute_name(:申请通过日期) %>:</strong></dt>
+  <% end %>
+  <% if @apply_record.shenqingtime!=nil %>
+      <dd><%= @apply_record.shenqingtime.localtime.to_s(:db) %></dd>
+  <% else %>
+      <dd><%= @apply_record.shenqingtime %></dd>
+  <% end %>
+
+  <dt><strong><%= model_class.human_attribute_name(:送往采样日期) %>:</strong></dt>
+  <% if @apply_record.sampletime!=nil %>
+      <dd><%= @apply_record.sampletime.localtime.to_s(:db) %></dd>
+  <% else %>
+      <dd><%= @apply_record.sampletime %></dd>
+  <% end %>
+
+  <dt><strong><%= model_class.human_attribute_name(:采样完成归还日期) %>:</strong></dt>
+  <% if @apply_record.returntime!=nil %>
+      <dd><%= @apply_record.returntime.localtime.to_s(:db) %></dd>
+  <% else %>
+      <dd><%= @apply_record.returntime %></dd>
+  <% end %>
+  <dt><strong><%= model_class.human_attribute_name(:出库日期) %>:</strong></dt>
+  <% if @apply_record.outtime!=nil %>
+      <dd><%= @apply_record.outtime.localtime.to_s(:db) %></dd>
+  <% else %>
+      <dd><%= @apply_record.outtime %></dd>
+  <% end %>
+
+  <dt><strong><%= model_class.human_attribute_name(:证书打印日期) %>:</strong></dt>
+  <% if @apply_record.printtime!=nil %>
+      <dd><%= @apply_record.printtime.localtime.to_s(:db) %></dd>
+  <% else %>
+      <dd><%= @apply_record.printtime %></dd>
+  <% end %>
+
+  <dt><strong><%= model_class.human_attribute_name(:证书签发日期) %>:</strong></dt>
+  <% if @apply_record.issuetime!=nil %>
+      <dd><%= @apply_record.issuetime.localtime.to_s(:db) %></dd>
+  <% else %>
+      <dd><%= @apply_record.issuetime %></dd>
+  <% end %>
+  <dt><strong><%= model_class.human_attribute_name(:操作状态) %>:</strong></dt>
+  <dd><%= @apply_record.state %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:库管状态) %>:</strong></dt>
+  <dd><%= @apply_record.state1 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:订单所属) %>:</strong></dt>
+  <dd><%= @apply_record.user %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:作品库管员) %>:</strong></dt>
+  <dd><%= @apply_record.itemsave %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:作品备案认证人员) %>:</strong></dt>
+  <dd><%= @apply_record.sample %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:草拟证书与发放人员) %>:</strong></dt>
+  <dd><%= @apply_record.issue %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:审核意见) %>:</strong></dt>
+  <dd><%= @apply_record.advice %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:证件类型) %>:</strong></dt>
+  <dd><%= @apply_record.advice %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:证件号码) %>:</strong></dt>
+  <dd><%= @apply_record.advice %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:证件图片) %>:</strong></dt>
+  <dd><%= image_tag @apply_record.idimage_url.to_s,:class =>"img-rounded" %></dd>
+  <br />
+  <dt><strong><%= model_class.human_attribute_name(:作品图片) %>:</strong></dt>
+  <dd><%= image_tag @apply_record.image_url.to_s,:class=>"img-rounded" %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:宏观图片) %>:</strong></dt>
+  <dd><%= image_tag @apply_record.macroimage_url.to_s,:class=>"img-rounded" %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:微观图片) %>:</strong></dt>
+  <dd><%= image_tag @apply_record.microimage_url.to_s,:class=>"img-rounded" %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:机器检索编码) %>:</strong></dt>
+  <dd><%= image_tag @apply_record.qrimage_url.to_s,:class=>"img-rounded" %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:关联艺术品) %>:</strong></dt>
+  <dd><%= @apply_record.art_works.count %>件(<%= link_to("点击查看详情",{:controller =>'art_works',:action => 'index',:id =>@apply_record.id},:class => "text-danger" )%>)</dd>
+
+</dl>
+</div>
+
+<% if current_user.job=="客服人员" &&@apply_record.state=="等待处理" %>
+    <%= link_to('添加关联艺术品',{:controller =>'art_works',:action => 'new',:id =>@apply_record.id },:class => "btn btn-default")%>
+<% end %>
+<hr />
+
+<%= link_to "返回",
+              apply_records_path, :class => 'btn btn-default'  %>
+<% unless (@apply_record.state=="采样完毕" || @apply_record.state=="备案物品归还") && current_user.job=="草拟与证书发送人员" %>
+<%= link_to "编辑",
+              edit_apply_record_path(@apply_record), :class => 'btn btn-default' %>
+<% end %>
+<% if (@apply_record.state=="等待处理" && current_user.job=="客服人员")||current_user.admin %>
+<%= link_to "删除",
+              apply_record_path(@apply_record),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '确定删除订单?')) },
+              :class => 'btn btn-danger' %>
+<% end %>

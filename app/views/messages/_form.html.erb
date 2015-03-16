@@ -1,0 +1,48 @@
+<%= tinymce %>
+<%= form_for @message, :html => { :class => "form-horizontal message" } do |f| %>
+
+    <% if @message.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @message.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :标题, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%= error_span(@message[:title]) %>
+  </div>
+    <div class="control-group">
+      <%= f.label :收件人, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :tousername, User.all.collect { |p| [ p.username] }, include_blank: true%>
+      </div>
+  <div class="control-group">
+    <%= f.label :内容, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :content,:class => "tinymce",:rows => 15, :cols => 120%>
+    </div>
+    <%= error_span(@message[:content]) %>
+  </div>
+    <%= error_span(@message[:tousername]) %>
+  </div>
+
+   <hr />
+
+
+  <%= f.submit '发送', :class => 'btn btn-primary' %>
+  <%= link_to "取消",
+            messages_path, :class => 'btn btn-default' %>
+
+<% end %>

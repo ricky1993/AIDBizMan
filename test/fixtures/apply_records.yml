@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  personcategory: MyString
+  item: MyString
+  timelimit: MyString
+  artcategory: MyString
+  organization: MyString
+  state: MyString
+
+two:
+  personcategory: MyString
+  item: MyString
+  timelimit: MyString
+  artcategory: MyString
+  organization: MyString
+  state: MyString
