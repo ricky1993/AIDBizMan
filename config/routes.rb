@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
+  get 'welcome/about_us'
+
+  get 'welcome/contact_us'
+
   resources :art_works
 
   post 'find/findApply'
@@ -16,7 +20,7 @@ Rails.application.routes.draw do
 
   get 'edit_user/index'
 
-  post 'edit_user/edit'
+  get 'edit_user/edit'
 
   get 'edit_user/show'
 

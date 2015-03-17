@@ -56,7 +56,7 @@
 
       <div class="masthead">
         <h3 class="text-muted"><%= link_to "AIDSystem",welcome_index_path %></h3>
-        <nav>
+          <nav>
           <ul class="nav nav-justified">
             <li><%= link_to "主页", apply_records_path,:class => "active"  %></li>
             <li><%= link_to "个人中心", edit_user_index_path %></li>
@@ -67,11 +67,8 @@
                 <li role="presentation"><%= link_to "发件箱",messages_path %></li>
               </ul>
             </li>
-            <li><%= link_to "退出", destroy_user_session_path,:method => :delete %></li>
-            <li><a href="#">关于AID</a></li>
-            <li><a href="#">联系我们</a></li>
             <li><a href="#"><div type="button" data-toggle="modal" data-target="#myModal">
-              通知栏
+              通知栏<% if count>0 %><strong class="text-danger">(<%= count %>)</strong><% end %>
             </div></a>
 
               <!-- Modal -->
@@ -90,15 +87,15 @@
                             <p>
                               <%= link_to("修改个人资料",{:controller =>'edit_user',:action => 'edit',:name =>current_user.username},:class => "btn btn-default")%></p>
                         <% else %>
-                            当前用户：<strong class="panel panel-primary"><%= current_user.username %></strong>
-                            <p>用户邮箱：<strong class="panel panel-primary"><%= current_user.email %></strong></p>
-                            <p>职务：<strong class="panel panel-primary"><%= current_user.job %></strong></p>
+                            当前用户：<strong><%= current_user.username %></strong>
+                            <p>用户邮箱：<strong><%= current_user.email %></strong></p>
+                            <p>职务：<strong><%= current_user.job %></strong></p>
                             <% if current_user.admin %>
                                 <p class="text-danger"><strong class="panel panel-primary">你是管理员用户</strong></p>
                             <% end %>
                         <% end %>
                         <% if count>0 %>
-                            <p class="panel panel-primary">您有<%= count %>封邮件未读，请查看收件箱</p>
+                            <p>您有<%= count %>封邮件未读，请查看收件箱</p>
                         <% end %>
                       </div><!--/.well -->
                     </div>
@@ -108,6 +105,7 @@
                   </div>
                 </div>
               </div></li>
+             <li><%= link_to "退出", destroy_user_session_path,:method => :delete %></li>
           </ul>
         </nav>
       </div>
@@ -146,7 +144,7 @@
                 <li><a href="#">主页</a></li>
                 <li><a href="#">服务</a></li>
                 <li><a href="#">链接</a></li>
-                <li><a href="#">联系我们</a></li>
+                <li><%=link_to "联系我们",welcome_contact_us_path %></li>
               </ul>
             </div><!-- end col-sm-2 -->
 
@@ -160,6 +158,7 @@
             </div><!-- end col-sm-2 -->
 
             <div class="col-sm-2">
+              <p>coded by Xavier & Ricky</p>
             </div><!-- end col-sm-2 -->
           </div><!-- end row -->
         </div><!-- end container -->

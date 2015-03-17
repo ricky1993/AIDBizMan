@@ -6,4 +6,6 @@ class ApplyRecord < ActiveRecord::Base
   mount_uploader :microimage , MicroimageUploader
   mount_uploader :qrimage , QrimageUploader
   mount_uploader :idimage,IdImageUploader
+
+
 end

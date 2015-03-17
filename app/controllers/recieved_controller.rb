@@ -1,4 +1,6 @@
 class RecievedController < ApplicationController
+  before_action :authenticate_user!
+
   def nav
 
   end

@@ -1,4 +1,5 @@
 class FindController < ApplicationController
+  before_action :authenticate_user!
 
   def findApply
     users=User.all

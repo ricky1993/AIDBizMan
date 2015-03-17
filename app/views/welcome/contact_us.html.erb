@@ -1,0 +1,75 @@
+<div class="container">
+  <% unless user_signed_in? %>
+      <div class="masthead">
+        <h3 class="text-muted">AIDSystem</h3>
+        <nav>
+          <ul class="nav nav-justified">
+            <li><%= link_to "主页",welcome_index_path %></li>
+            <li><%= link_to "订单管理" ,new_user_session_path %></li>
+            <li><a href="#">艺术品查询</a></li>
+            <li><a href="#">其他服务</a></li>
+            <li><%= link_to "关于AID",welcome_about_us_path %></li>
+            <li class="active"><%=link_to "联系我们",welcome_contact_us_path %></li>
+          </ul>
+        </nav>
+      </div>
+
+      <style>
+          body{
+              background-image:url(<%=image_path("c.jpg")%>);
+              background-position: center;
+          }
+      </style>
+  <% end %>
+
+  <style>
+      footer {
+          background: #333;
+          color: #eee;
+          font-size: 11px;
+          padding: 20px;
+          position: absolute;
+          width:100%;
+      }
+  </style>
+<div id="templatemo_content_wrapper" style="padding-left:0px;">
+  <br />
+  <div id="templatemo_content" style="width:100%;">
+    <div style="line-height: 2; font-size: 14px;">
+      <p class="text-danger">固定电话：021-34293420</p>
+
+      <p class="text-danger">手机： 15721488788</p>
+
+      <p class="text-danger">传真：021-34293420</p>
+
+      <p class="text-danger">邮箱：<a href="mailto:shjd@artwin.com" class="lnk_red" target="_blank">webvisionss@gmail.com</a> </p>
+
+      <p class="text-danger">公司地址： </p>
+    </div>
+    <div id="AddressMap" style="width:600px; height:300px; margin-left:100px;"></div>
+
+  </div>
+</div>
+
+
+
+
+<script src="http://api.map.baidu.com/api?v=1.4" type="text/javascript"></script>
+<script type="text/ecmascript">
+    $(function () {
+        $("#templatemo_menu").find("a").removeClass("current");
+        $("#ContractUs").addClass("current");
+
+
+        // 百度地图API功能
+        var map = new BMap.Map("AddressMap");
+        var point = new BMap.Point(121.418496, 31.023292);
+        // 创建Map实例
+        map.centerAndZoom(point, 15);
+        map.setCurrentCity("上海");
+        var marker = new BMap.Marker(point);  // 创建标注
+        map.addOverlay(marker);               // 将标注添加到地图中
+        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+    });
+</script>
+</div>
