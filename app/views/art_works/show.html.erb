@@ -17,37 +17,41 @@
 </p>
 
 <p>
-  <strong>艺术家姓名:</strong>
+  <strong>艺术家名称:</strong>
   <%= @art_work.author %>
 </p>
 
 <p>
   <strong>图片:</strong>
-  <%= image_tag @art_work.image_url.to_s,:class=>"img-rounded" %>
+  <%= image_tag @art_work.image_url(:thumb).to_s,:class=>"img-rounded" %>
 </p>
 
 <p>
   <strong>宏观图片:</strong>
-  <%= image_tag @art_work.macroimage_url.to_s,:class=>"img-rounded" %>
+  <%= image_tag @art_work.macroimage_url(:thumb).to_s,:class=>"img-rounded" %>
 </p>
 
 
   <p>
     <strong>微观图片i:</strong>
-    <%= image_tag @art_work.microimage_a_url.to_s,:class=>"img-rounded" %>
+    <%= image_tag @art_work.microimage_a_url(:thumb).to_s,:class=>"img-rounded" %>
   </p>
 
   <p>
     <strong>微观图片ii:</strong>
-    <%= image_tag @art_work.microimage_b_url.to_s,:class=>"img-rounded" %>
+    <%= image_tag @art_work.microimage_b_url(:thumb).to_s,:class=>"img-rounded" %>
   </p>
   <p>
     <strong>微观图片iii:</strong>
-    <%= image_tag @art_work.microimage_c_url.to_s,:class=>"img-rounded" %>
+    <%= image_tag @art_work.microimage_c_url(:thumb).to_s,:class=>"img-rounded" %>
   </p>
   <p>
     <strong>微观图片iv:</strong>
-    <%= image_tag @art_work.microimage_d_url.to_s,:class=>"img-rounded" %>
+    <%= image_tag @art_work.microimage_d_url(:thumb).to_s,:class=>"img-rounded" %>
+  </p>
+  <p>
+    <strong>机器检索编码:</strong>
+    <%= image_tag @art_work.qrimage_url(:thumb).to_s,:class=>"img-rounded" %>
   </p>
 
 <p>

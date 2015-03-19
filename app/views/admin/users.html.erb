@@ -1,0 +1,44 @@
+<%- model_class = ApplyRecord -%>
+<h1 class="page-header">用户管理</h1>
+<table class="table table-striped" border="1.0">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:用户名) %></th>
+    <th><%= model_class.human_attribute_name(:手机号) %></th>
+    <th><%= model_class.human_attribute_name(:邮箱) %></th>
+    <th><%= model_class.human_attribute_name(:创建时间) %></th>
+    <th><%= model_class.human_attribute_name(:用户状态) %></th>
+    <th><%= model_class.human_attribute_name(:是否管理员) %></th>
+    <th><%= model_class.human_attribute_name(:工作) %></th>
+    <th><%= model_class.human_attribute_name(:操作) %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.username %></td>
+        <td><%= user.phonenumber %></td>
+        <td><%= user.email %></td>
+        <td><%= user.created_at.localtime.to_s(:db) %></td>
+        <td>正常</td>
+        <td><% if user.admin %>
+              是
+          <% else %>
+              否
+          <% end %>
+        </td>
+        <td><%= user.job %></td>
+        <td><%= link_to("编辑",{:controller =>'edit_user',:action => 'edit',:name =>user.username},:class => "btn btn-default")%>
+          <% unless user.admin %>
+              <%= link_to("订单",{:controller=>'edit_user',:action=>'handle',:name=>user.username},:class=>"btn btn-default") %>
+          <% end %>
+        </td>
+
+  <% end %>
+  </tr>
+  </tbody>
+</table>
+<%= paginate @users %>
+<br />
+<br />
+<%= link_to "订单管理",admin_apply_records_path,:class => "btn btn-primary" %>

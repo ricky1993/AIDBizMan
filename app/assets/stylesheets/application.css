@@ -30,8 +30,8 @@ footer {
     color: #eee;
     font-size: 11px;
     padding: 20px;
+    width:100%;
     position: absolute;
-    width:100%
 }
 
 /* CUSTOMIZE THE NAVBAR
