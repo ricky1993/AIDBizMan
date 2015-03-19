@@ -27,6 +27,30 @@
 </p>
 
 <p>
+  <strong>宏观图片:</strong>
+  <%= image_tag @art_work.macroimage_url.to_s,:class=>"img-rounded" %>
+</p>
+
+
+  <p>
+    <strong>微观图片i:</strong>
+    <%= image_tag @art_work.microimage_a_url.to_s,:class=>"img-rounded" %>
+  </p>
+
+  <p>
+    <strong>微观图片ii:</strong>
+    <%= image_tag @art_work.microimage_b_url.to_s,:class=>"img-rounded" %>
+  </p>
+  <p>
+    <strong>微观图片iii:</strong>
+    <%= image_tag @art_work.microimage_c_url.to_s,:class=>"img-rounded" %>
+  </p>
+  <p>
+    <strong>微观图片iv:</strong>
+    <%= image_tag @art_work.microimage_d_url.to_s,:class=>"img-rounded" %>
+  </p>
+
+<p>
   <strong>描述:</strong>
   <%= @art_work.describe %>
 </p>
@@ -34,6 +58,6 @@
 <hr />
 
 <% if @art_work.apply_record.state=="等待处理" %>
-<%= link_to '编辑', edit_art_work_path(@art_work),:class =>'btn btn-default'  %> |
+<%= link_to '编辑', edit_art_work_path(@art_work),:class =>'btn btn-default'  %>
  <% end %>
 <%= link_to("返回",{:controller =>'art_works',:action => 'index',:id =>@art_work.apply_record.id} ,:class => "btn btn-default")%>

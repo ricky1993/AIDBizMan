@@ -92,14 +92,6 @@
   <dt><strong><%= model_class.human_attribute_name(:证件图片) %>:</strong></dt>
   <dd><%= image_tag @apply_record.idimage_url.to_s,:class =>"img-rounded" %></dd>
   <br />
-  <dt><strong><%= model_class.human_attribute_name(:作品图片) %>:</strong></dt>
-  <dd><%= image_tag @apply_record.image_url.to_s,:class=>"img-rounded" %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:宏观图片) %>:</strong></dt>
-  <dd><%= image_tag @apply_record.macroimage_url.to_s,:class=>"img-rounded" %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:微观图片) %>:</strong></dt>
-  <dd><%= image_tag @apply_record.microimage_url.to_s,:class=>"img-rounded" %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:机器检索编码) %>:</strong></dt>
-  <dd><%= image_tag @apply_record.qrimage_url.to_s,:class=>"img-rounded" %></dd>
   <dt><strong><%= model_class.human_attribute_name(:关联艺术品) %>:</strong></dt>
   <dd><%= @apply_record.art_works.count %>件(<%= link_to("点击查看详情",{:controller =>'art_works',:action => 'index',:id =>@apply_record.id},:class => "text-danger" )%>)</dd>
 

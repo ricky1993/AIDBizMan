@@ -42,12 +42,43 @@
       <%= f.text_area :describe %>
     </div>
 
+    <div class="controls">
+      <%= f.label :上传宏观图片 %>
+      <%= f.file_field :macroimage %>
+      <%= f.hidden_field :macroimage_cache %>
+    </div>
+
+    <div class="controls">
+      <%= f.label :上传微观图片I%>
+      <%= f.file_field :microimage_a %>
+      <%= f.hidden_field :microimage_a_cache %>
+    </div>
+    <div class="controls">
+      <%= f.label :上传微观图片II%>
+      <%= f.file_field :microimage_b %>
+      <%= f.hidden_field :microimage_b_cache %>
+    </div>
+    <div class="controls">
+      <%= f.label :上传微观图片III%>
+      <%= f.file_field :microimage_c %>
+      <%= f.hidden_field :microimage_c_cache %>
+    </div>
+    <div class="controls">
+      <%= f.label :上传微观图片IV%>
+      <%= f.file_field :microimage_d %>
+      <%= f.hidden_field :microimage_d_cache %>
+    </div>
+    <div class="controls">
+      <%= f.label :上传机器检索编码%>
+      <%= f.file_field :qrimage %>
+      <%= f.hidden_field :qrimage_cache %>
+    </div>
     <%= f.hidden_field :apply_record_id,:value=>@apply_record.id %>
 
 
     <div class="actions">
       <%= f.submit "确认",:class => 'btn btn-default' %>
-      <%= link_to '返回', art_works_path,:class => 'btn btn-default' %>
+      <%= link_to '返回', {:controller =>'apply_records',:action => 'show',:id =>@apply_record.id},:class => 'btn btn-default' %>
     </div>
 <% end %>
 

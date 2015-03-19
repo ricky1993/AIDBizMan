@@ -130,33 +130,6 @@
               <%= error_span(@apply_record[:state]) %>
             </div>
                 <% end %>
-            <div class="control-group">
-              <hr />
-              <p>上传宏观图片</p>
-              <div class="controls">
-                <%= f.file_field :macroimage %>
-                <%= f.hidden_field :macroimage_cache %>
-              </div>
-              <%= error_span(@apply_record[:state]) %>
-            </div>
-            <div class="control-group">
-              <hr />
-              <p>上传微观图片</p>
-              <div class="controls">
-                <%= f.file_field :microimage %>
-                <%= f.hidden_field :microimage_cache %>
-              </div>
-              <%= error_span(@apply_record[:state]) %>
-            </div>
-            <div class="control-group">
-              <hr />
-              <p>上传二维码结论</p>
-              <div class="controls">
-                <%= f.file_field :qrimage %>
-                <%= f.hidden_field :qrimage_cache %>
-              </div>
-              <%= error_span(@apply_record[:state]) %>
-            </div>
         <% end %>
         <% if current_user.job=="草拟与证书发送人员" %>
             <div class="control-group">

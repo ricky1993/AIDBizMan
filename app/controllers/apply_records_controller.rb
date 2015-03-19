@@ -13,14 +13,14 @@ class ApplyRecordsController < ApplicationController
       @apply_records = apply_records.where.not(:state=>"证书签发完毕").page(params[:page]).order(:created_at=>:desc)
       #@apply_records2 = ApplyRecord.where(["user = ? and state = ?",current_user.username,"证书签发完毕"]).page(params[:page]).order(:created_at=>:desc)
     elsif current_user.job=="作品库管员"
-      @apply_records=ApplyRecord.where( :state =>["申请通过","物品交接中" ,"物品已入库","物品送往备案","采样中","采样完毕","备案物品归还"]).page(params[:page]).order(:created_at=>:desc)
+      @apply_records=ApplyRecord.where(:itemsave => current_user.username, :state =>["申请通过","物品交接中" ,"物品已入库","物品送往备案","采样中","采样完毕","备案物品归还"]).page(params[:page]).order(:created_at=>:desc)
       #@apply_records2=ApplyRecord.where(["state = ? and itemsave = ?", "证书签发完毕", current_user.username]).page(params[:page]).order(:created_at=>:desc)
     elsif current_user.job=="作品备案认证人员"
-      @apply_records=ApplyRecord.where( :state =>["物品已入库","物品送往备案","采样中"]).page(params[:page]).order(:created_at=>:desc)
+      @apply_records=ApplyRecord.where(:sample => current_user.username,  :state =>["物品已入库","物品送往备案","采样中"]).page(params[:page]).order(:created_at=>:desc)
       apply_records=ApplyRecord.where.not(:state => ["等待处理","物品已入库","物品送往备案","采样中"]).page(params[:page]).order(:created_at=>:desc)
       #@apply_records2=apply_records.where(:sample=>"admin3")
     elsif current_user.job=="草拟与证书发送人员"
-      @apply_records=ApplyRecord.where( :state =>["采样完毕","备案物品归还","物品已出库","证书签发中"]).page(params[:page]).order(:created_at=>:desc)
+      @apply_records=ApplyRecord.where(:issue => current_user.username,  :state =>["采样完毕","备案物品归还","物品已出库","证书签发中"]).page(params[:page]).order(:created_at=>:desc)
       #@apply_records2=ApplyRecord.where(:state => "证书签发完毕").page(params[:page]).order(:created_at=>:desc)
     elsif current_user.admin
       @apply_records=ApplyRecord.page(params[:page]).order(:created_at=>:desc)
