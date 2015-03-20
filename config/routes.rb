@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :art_works
 
-  post 'find/findApply'
+  get 'find/findApply'
 
   get 'recieved/index'
 
