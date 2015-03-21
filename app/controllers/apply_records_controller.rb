@@ -5,8 +5,7 @@ class ApplyRecordsController < ApplicationController
   # GET /apply_records.json
   def index
     if current_user.admin
-      @users=User.all.page(params[:page])
-      @apply_records=ApplyRecord.all.order(:created_at=>:desc).page(params[:page])
+      redirect_to :controller => "admin",:action => "index"
     end
     if current_user.job=="客服人员"
       apply_records = ApplyRecord.where(:user => current_user.username).page(params[:page]).order(:created_at=>:desc)
@@ -25,6 +24,7 @@ class ApplyRecordsController < ApplicationController
     elsif current_user.admin
       @apply_records=ApplyRecord.page(params[:page]).order(:created_at=>:desc)
     end
+    @count=0;
   end
 
   # GET /apply_records/1

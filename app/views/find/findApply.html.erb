@@ -9,7 +9,7 @@
     </div>
 
     <div>
-      <%= form_tag(find_findApply_path,:class=>"form-horizontal",:method => :post,) do %>
+      <%= form_tag(find_findApply_path,:class=>"form-horizontal",:method => :get,) do %>
           <div class="row">
             <div class="col-md-3">订单号：<%= text_field_tag :dingdanhao,nil,placeholder:"请输入订单号"%></div>
             <div class="col-md-3">申请人姓名：<%= text_field_tag :personname,nil,placeholder:"请输入申请人姓名"%></div>
@@ -26,7 +26,7 @@
       <hr />
     </div>
 
-    <h2 class="page-header">未完成订单</h2>
+    <h2 class="page-header">订单查找</h2>
     <table class="table table-striped" border="1.0">
       <thead>
       <tr>
@@ -65,8 +65,10 @@
           </tr>
       <% end %>
       </tbody>
-      <%= paginate @apply_records %>
     </table>
+    <%= paginate @apply_records %>
+    <br />
+    <%= link_to "返回",apply_records_path,:class => 'btn btn-primary' %>
 <% end %>
 
 
@@ -74,7 +76,7 @@
 <% if current_user.admin %>
     <h1 class="page-header">订单管理</h1>
     <div>
-      <%= form_tag(find_findApply_path,:class=>"form-horizontal",:method => :post,) do %>
+      <%= form_tag(find_findApply_path,:class=>"form-horizontal",:method => :get,) do %>
           <div class="row">
             <div class="col-md-3">订单号：<%= text_field_tag :dingdanhao,nil,placeholder:"请输入订单号"%></div>
             <div class="col-md-3">申请人姓名：<%= text_field_tag :personname,nil,placeholder:"请输入申请人姓名"%></div>

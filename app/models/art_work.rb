@@ -7,5 +7,5 @@ class ArtWork < ActiveRecord::Base
   mount_uploader :microimage_b , ArtMicroimageUploader
   mount_uploader :microimage_c , ArtMicroimageUploader
   mount_uploader :microimage_d , ArtMicroimageUploader
-  mount_uploader :qrimage , ArtQrimageUploader
+  mount_uploader :myimage,MyimageUploader
 end

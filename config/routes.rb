@@ -8,6 +8,12 @@ Rails.application.routes.draw do
 
   resources :art_works
 
+  get 'admin/users'
+
+  get 'admin/apply_records'
+
+  get 'admin/index'
+
   get 'find/findApply'
 
   get 'recieved/index'
@@ -22,7 +28,7 @@ Rails.application.routes.draw do
 
   get 'edit_user/edit'
 
-  get 'edit_user/show'
+  post 'edit_user/show'
 
   get 'edit_user/othershow'
 

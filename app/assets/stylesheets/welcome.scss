@@ -90,3 +90,29 @@ body {
     padding-left: 0;
   }
 }
+
+#myCarousel {
+  margin-top: 60px;
+}
+
+.carousel-caption {
+  font-size: 24px;
+}
+
+.carousel-caption h4 {
+  font-size: 32px;
+}
+
+#myCarousel .item { height: 400px; }
+
+#slide1 {
+  background: url('../images/first.jpg') top center no-repeat;
+}
+
+#slide2 {
+  background: url('../images/second.jpg') top center no-repeat;
+}
+
+#slide3 {
+  background: url('../images/third.jpg') top center no-repeat;
+}

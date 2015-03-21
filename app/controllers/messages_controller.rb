@@ -8,6 +8,7 @@ class MessagesController < ApplicationController
   def index
     @user=current_user
     @messages = current_user.message.where(:flag=>true).page(params[:page]).order(:created_at)
+    @count=0
   end
 
   # GET /messages/1
@@ -40,7 +41,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: '信件新建成功.' }
+        format.html { redirect_to @message, notice: '信件发送成功.' }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new }

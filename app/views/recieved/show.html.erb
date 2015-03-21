@@ -1,31 +1,35 @@
-<p id="notice"><%= notice %></p>
-<h1 class="page-header">邮件详情</h1>
-<div class="bg-success">
-<p>
-  <strong>标题:</strong>
-  <%= @message.title %>
-</p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h1 class="page-header">邮件详情</h1>
+  <div class="bg-success">
+    <p>
+    <h4 class="text-danger"><strong>标题:</strong></h4>
+    <%= @message.title %>
+    </p>
 
-<p>
-  <strong>发件人:</strong>
-  <%= User.find(@message.user_id).username %>
-</p>
+    <p>
+    <h4 class="text-danger"><strong>发件人:</strong></h4>
+    <%= User.find(@message.user_id).username %>
+    </p>
 
 
-<p>
-  <strong>收件人:</strong>
-  <%= @message.tousername %>
-</p>
+    <p>
+    <h4 class="text-danger"><strong>收件人:</strong></h4>
+    <span><%= @message.tousername %></span>
+    </p>
 
-<p>
-  <strong>发件日期：</strong>
-  <%= @message.created_at %>
-</p>
+    <p>
+    <h4 class="text-danger"><strong>发件日期：</strong></h4>
+    <%= @message.created_at.localtime.to_s(:db) %>
+    </p>
 
-<p>
-  <strong>内容:</strong>
-  <%= @message.content.html_safe %>
-</p>
+    <p>
+    <h4 class="text-danger"><strong>内容:</strong></h4>
+    <p class="panel panel-primary"> <strong><%= @message.content.html_safe %></strong></p>
+    </p>
+    <br />
+    <p class="panel panel-primary"></p>
+  </div>
+
+  <%= link_to '返回我的邮箱', messages_path,:class => 'btn btn-default'%>
 </div>
-
-<%= link_to '返回我的邮箱', messages_path,:class => 'btn btn-default'%>

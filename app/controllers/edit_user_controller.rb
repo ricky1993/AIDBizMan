@@ -43,5 +43,9 @@ class EditUserController < ApplicationController
     end
   end
 
+  def admin
+
+  end
+
 
 end

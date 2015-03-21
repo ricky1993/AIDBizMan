@@ -5,6 +5,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>编号</th>
       <th>艺术品名称</th>
       <th>创作日期</th>
       <th>创作地点</th>
@@ -17,6 +18,8 @@
   <tbody>
     <% @art_works.each do |art_work| %>
       <tr>
+        <% @count=@count+1 %>
+        <td><%= @count %></td>
         <td><%= art_work.name %></td>
         <td><%= art_work.date %></td>
         <td><%= art_work.place %></td>

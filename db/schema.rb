@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317132604) do
+ActiveRecord::Schema.define(version: 20150320061504) do
 
   create_table "apply_records", force: :cascade do |t|
     t.string   "personname"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20150317132604) do
     t.string   "microimage_c"
     t.string   "microimage_d"
     t.string   "QRimage"
+    t.string   "myimage"
   end
 
   add_index "art_works", ["apply_record_id"], name: "index_art_works_on_apply_record_id"

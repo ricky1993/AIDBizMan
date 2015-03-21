@@ -9,7 +9,7 @@
 </div>
 
     <div>
-    <%= form_tag(find_findApply_path,:class=>"form-horizontal",:method => :post,) do %>
+    <%= form_tag(find_findApply_path,:class=>"form-horizontal",:method => :get,) do %>
           <div class="row">
         <div class="col-md-3">订单号：<%= text_field_tag :dingdanhao,nil,placeholder:"请输入订单号"%></div>
           <div class="col-md-3">申请人姓名：<%= text_field_tag :personname,nil,placeholder:"请输入申请人姓名"%></div>
@@ -20,6 +20,7 @@
             <div class="col-md-3">申请人类别：<%= select_tag(:personcategory,options_for_select(['无','艺术家','藏家' ,'艺术机构'], 4)) %></div>
               <div class="col-md-3">开始时间：<%= select_date Date.today, prefix: :start_date %></div>
                 <div class="col-md-3">结束时间：<%= select_date Date.today, prefix: :end_date %></div>
+                <div class="col-md-3">订单所属：<%= select_tag :tousername, options_for_select(User.all.collect { |p| [ p.username] }), include_blank: true %></div>
                 </div>
           <br /><br /><%= submit_tag "查找" ,:class => 'btn btn-primary' %>
     <% end %>
@@ -27,9 +28,10 @@
     </div>
 
     <h2 class="page-header">未完成订单</h2>
- <table class="table table-striped" border="1.0">
+ <table class="table table-bordered">
   <thead>
     <tr>
+      <th><%= model_class.human_attribute_name(:编号) %></th>
       <th><%= model_class.human_attribute_name(:订单号) %></th>
       <th><%= model_class.human_attribute_name(:申请人姓名) %></th>
       <th><%= model_class.human_attribute_name(:申请人类别) %></th>
@@ -47,6 +49,8 @@
   <tbody>
     <% @apply_records.each do |apply_record| %>
       <tr>
+        <% @count=@count+1 %>
+        <td><%= @count %></td>
         <td><%= apply_record.dingdanhao %></td>
         <td><%= apply_record.personname %></td>
         <td><%= apply_record.personcategory %></td>

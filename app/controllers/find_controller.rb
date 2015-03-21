@@ -31,6 +31,21 @@ class FindController < ApplicationController
       apply_records=apply_records.where("created_at >= :start_date AND created_at <= :end_date", {start_date: start_time, end_date: end_time})
     end
 
+    if params[:tousername]!=nil
+      user=User.where(:username => params[:tousername]).first
+      if user.job=="客服人员"
+        apply_records=apply_records.where(:user=>user.username)
+      elsif user.job=="作品库管员"
+        apply_records=apply_records.where(:itemsave=>user.username)
+      elsif user.job=="作品备案认证人员"
+        apply_records=apply_records.where(:sample=>user.username)
+      elsif user.job=="草拟与证书发送人员"
+        apply_records=apply_records.where(:issue=>user.username)
+      else
+        apply_records=apply_records
+      end
+    end
+
     @apply_records=apply_records.page(params[:page]).order(:created_at=>:desc)
     @users=users.page(params[:page]).order(:created_at=>:asc)
 

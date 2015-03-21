@@ -8,6 +8,7 @@ class ArtWorksController < ApplicationController
   def index
     @apply_record=ApplyRecord.find(params[:id])
     @art_works = @apply_record.art_works.order(:created_at=>:desc).page(params[:page])
+    @count=0
   end
 
   # GET /art_works/1
@@ -33,7 +34,7 @@ class ArtWorksController < ApplicationController
     @art_work=ArtWork.new(art_work_params)
     respond_to do |format|
       if @art_work.save
-        format.html { redirect_to @art_work, notice: '艺术品被成功创建' }
+        format.html { redirect_to @art_work}
         format.json { render :show, status: :created, location: @art_work }
       else
         format.html { render :new }
@@ -47,7 +48,7 @@ class ArtWorksController < ApplicationController
   def update
     respond_to do |format|
       if @art_work.update(art_work_params)
-        format.html { redirect_to @art_work, notice: '艺术品资料被成功更新' }
+        format.html { redirect_to @art_work }
         format.json { render :show, status: :ok, location: @art_work }
       else
         format.html { render :edit }
@@ -61,7 +62,7 @@ class ArtWorksController < ApplicationController
   def destroy
     @art_work.destroy
     respond_to do |format|
-      format.html { redirect_to art_works_url, notice: '成功删除艺术品信息' }
+      format.html { redirect_to :back}
       format.json { head :no_content }
     end
   end
@@ -74,6 +75,6 @@ class ArtWorksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def art_work_params
-      params.require(:art_work).permit(:name, :date, :place, :author, :image, :macroimage, :microimage_a, :microimage_b, :microimage_c, :microimage_d, :qrimage, :describe, :apply_record_id)
+      params.require(:art_work).permit(:name, :date, :place, :author, :image, :macroimage, :microimage_a, :microimage_b, :microimage_c, :microimage_d, :myimage,:describe, :apply_record_id)
     end
 end

@@ -1,48 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "AIDSystem" %></title>
-    <%= csrf_meta_tags %>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "AIDSystem" %></title>
+  <%= csrf_meta_tags %>
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
-    <![endif]-->
+  <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+  <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
+  <![endif]-->
 
-    <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
 
-    <!-- For third-generation iPad with high-resolution Retina display: -->
-    <!-- Size should be 144 x 144 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+  <!-- For third-generation iPad with high-resolution Retina display: -->
+  <!-- Size should be 144 x 144 pixels -->
+  <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
 
-    <!-- For iPhone with high-resolution Retina display: -->
-    <!-- Size should be 114 x 114 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+  <!-- For iPhone with high-resolution Retina display: -->
+  <!-- Size should be 114 x 114 pixels -->
+  <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
 
-    <!-- For first- and second-generation iPad: -->
-    <!-- Size should be 72 x 72 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+  <!-- For first- and second-generation iPad: -->
+  <!-- Size should be 72 x 72 pixels -->
+  <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
 
-    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-    <!-- Size should be 57 x 57 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+  <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+  <!-- Size should be 57 x 57 pixels -->
+  <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
 
-    <!-- For all other devices -->
-    <!-- Size should be 32 x 32 pixels -->
-    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+  <!-- For all other devices -->
+  <!-- Size should be 32 x 32 pixels -->
+  <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
-    <%= javascript_include_tag "application" %>
-  </head>
+  <%= javascript_include_tag "application" %>
 
-  <% if user_signed_in? %>
+  <style>
+      html, body{height:100%;}
+      .wrapper{
+          min-height:100%;
+          _height:100%;
+          margin-bottom:-120px;   /*假定页脚的高度为120px*/
+      }
+      .footer, .footer_placeholder{height:120px;}
+  </style>
+
+</head>
+
+<% if user_signed_in? %>
     <style>
         body{
             background-image:url(<%=image_path("d.jpg")%>);
         }
     </style>
+
+
 <% else %>
     <style>
         body{
@@ -50,127 +63,128 @@
         }
     </style>
 <% end %>
-  <body>
+<body>
+<div class="wrapper">
   <% if user_signed_in? %>
       <div class="container">
 
-      <div class="masthead">
-        <h3 class="text-muted"><%= link_to "AIDSystem",welcome_index_path %></h3>
+        <div class="masthead">
+          <h3 class="text-muted"><%= link_to "AIDSystem",welcome_index_path %></h3>
           <nav>
-          <ul class="nav nav-justified">
-            <li><%= link_to "主页", apply_records_path,:class => "active"  %></li>
-            <li class="dropdown">
-              <a herf="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li role="presentation"><%= link_to "详细信息", edit_user_index_path%></li>
-                <li role="presentation"><%= link_to "修改密码", edit_registration_path(:user) %></li>
-              </ul>
-            </li>
+            <ul class="nav nav-justified">
+              <li><%= link_to "主页", apply_records_path,:class => "active"  %></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li role="presentation"><%= link_to "详细信息",edit_user_index_path %></li>
+                  <li role="presentation"><%= link_to "修改密码",edit_registration_path(:user) %></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">我的邮箱<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li role="presentation"><%= link_to "收件箱",recieved_index_path %></li>
+                  <li role="presentation"><%= link_to "发件箱",messages_path %></li>
+                </ul>
+              </li>
+              <li><a href="#"><div type="button" data-toggle="modal" data-target="#myModal">
+                通知栏<% if count>0 %><span class="badge"><%= count %></span><% end %>
+              </div></a>
 
-
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">我的邮箱<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li role="presentation"><%= link_to "收件箱",recieved_index_path %></li>
-                <li role="presentation"><%= link_to "发件箱",messages_path %></li>
-              </ul>
-            </li>
-            <li><a href="#"><div type="button" data-toggle="modal" data-target="#myModal">
-              通知栏<% if count>0 %><strong class="text-danger">(<%= count %>)</strong><% end %>
-            </div></a>
-
-              <!-- Modal -->
-              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel">通知栏</h4>
-                    </div>
-                    <div class="modal-body">
-                      <div class="well sidebar-nav">
-                        <h3>提示板</h3>
-                        <% if current_user.job==nil %>
-                            <p><strong>请完善你的个人资料</strong>
-                            <p>
-                              <%= link_to("修改个人资料",{:controller =>'edit_user',:action => 'edit',:name =>current_user.username},:class => "btn btn-default")%></p>
-                        <% else %>
-                            当前用户：<strong><%= current_user.username %></strong>
-                            <p>用户邮箱：<strong><%= current_user.email %></strong></p>
-                            <p>职务：<strong><%= current_user.job %></strong></p>
-                            <% if current_user.admin %>
-                                <p class="text-danger"><strong class="panel panel-primary">你是管理员用户</strong></p>
-                            <% end %>
-                        <% end %>
-                        <% if count>0 %>
-                            <p>您有<%= count %>封邮件未读，请查看收件箱</p>
-                        <% end %>
-                      </div><!--/.well -->
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">通知栏</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="well sidebar-nav">
+                          <h3>提示板</h3>
+                          <% if current_user.job==nil %>
+                              <p><strong>请完善你的个人资料</strong>
+                              <p>
+                                <%= link_to("修改个人资料",{:controller =>'edit_user',:action => 'edit',:name =>current_user.username},:class => "btn btn-default")%></p>
+                          <% else %>
+                              当前用户：<strong><%= current_user.username %></strong>
+                              <p>用户邮箱：<strong><%= current_user.email %></strong></p>
+                              <p>职务：<strong><%= current_user.job %></strong></p>
+                              <% if current_user.admin %>
+                                  <p class="text-danger"><strong>你是管理员用户</strong></p>
+                              <% end %>
+                          <% end %>
+                          <% if count>0 %>
+                              <p>您有<%= count %>封邮件未读，请查看收件箱(<strong class="text-danger"><%= link_to "点击查看",recieved_index_path %></strong>)</p>
+                          <% end %>
+                        </div><!--/.well -->
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div></li>
-             <li><%= link_to "退出", destroy_user_session_path,:method => :delete %></li>
-          </ul>
-        </nav>
-      </div>
+                </div></li>
+              <li><%= link_to "退出", destroy_user_session_path,:method => :delete %></li>
+            </ul>
+          </nav>
         </div>
+      </div>
 
-      <% end %>
+  <% end %>
 
-      <% if user_signed_in? %>
+  <% if user_signed_in? %>
+      <div class="container">
+        <%= bootstrap_flash %>
+  <% end %>
+
+  <%= yield %>
+
+  </div>
+  <div class="footer_placeholder"></div>
+  <br />
+</div>
+
+<div class="footer">
+  <footer>
     <div class="container">
-          <%= bootstrap_flash %>
-    <% end %>
+      <div class="row">
+        <div class="col-sm-2">
+          <h6>Copyright &copy; 2015 AID</h6>
+        </div><!-- end col-sm-2 -->
 
-          <%= yield %>
+        <div class="col-sm-4">
+          <h6>关于我们</h6>
+          <p> AID系统是一个关于艺术品鉴别与管理的系统,这个系统的作用是管理艺术品鉴别的订单，整个系统由很多部分组成,现在只实现了基本的订单管理的AID系统是一个关于艺术品鉴别与管理的系统,这个系统的作用是管理艺术品鉴别的订单，整个系统由很多部分组成,现在只实现了基本的订单管理的AID系统是一个关于艺术品鉴别与</p>
+        </div><!-- end col-sm-4 -->
 
-    </div>
+        <div class="col-sm-2">
+          <h6>导航</h6>
+          <ul class="unstyled">
+            <li><%= link_to "主页",apply_records_path %></li>
+            <li><a href="#">服务</a></li>
+            <li><a href="#">链接</a></li>
+            <li><%=link_to "联系我们",welcome_contact_us_path %></li>
+            <li><%=link_to "关于我们",welcome_about_us_path %></li>
+          </ul>
+        </div><!-- end col-sm-2 -->
 
+        <div class="col-sm-2">
+          <h6>保持联系</h6>
+          <ul class="unstyled">
+            <li><a href="#">微博</a></li>
+            <li><a href="#">微博</a></li>
+            <li><a href="#">QQ</a></li>
+          </ul>
+        </div><!-- end col-sm-2 -->
 
-
-
-    <br />
-      <footer>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-2">
-              <h6>Copyright &copy; 2015 AID</h6>
-            </div><!-- end col-sm-2 -->
-
-            <div class="col-sm-4">
-              <h6>关于我们</h6>
-              <p> AID系统是一个关于艺术品鉴别与管理的系统,这个系统的作用是管理艺术品鉴别的订单，整个系统由很多部分组成,现在只实现了基本的订单管理的AID系统是一个关于艺术品鉴别与管理的系统,这个系统的作用是管理艺术品鉴别的订单，整个系统由很多部分组成,现在只实现了基本的订单管理的AID系统是一个关于艺术品鉴别与</p>
-            </div><!-- end col-sm-4 -->
-
-            <div class="col-sm-2">
-              <h6>导航</h6>
-              <ul class="unstyled">
-                <li><a href="#">主页</a></li>
-                <li><a href="#">服务</a></li>
-                <li><a href="#">链接</a></li>
-                <li><%=link_to "联系我们",welcome_contact_us_path %></li>
-              </ul>
-            </div><!-- end col-sm-2 -->
-
-            <div class="col-sm-2">
-              <h6>保持联系</h6>
-              <ul class="unstyled">
-                <li><a href="#">微信</a></li>
-                <li><a href="#">微博</a></li>
-                <li><a href="#">QQ</a></li>
-              </ul>
-            </div><!-- end col-sm-2 -->
-
-            <div class="col-sm-2">
-              <p>coded by Xavier & Ricky</p>
-            </div><!-- end col-sm-2 -->
-          </div><!-- end row -->
-        </div><!-- end container -->
-      </footer>
-    <!-- /container -->
-  </body>
+        <div class="col-sm-2">
+          <p>coded by Xavier & Ricky</p>
+        </div><!-- end col-sm-2 -->
+      </div><!-- end row -->
+    </div><!-- end container -->
+  </footer>
+</div>
+<!-- /container -->
+</body>
 </html>

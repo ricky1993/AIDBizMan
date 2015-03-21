@@ -10,6 +10,7 @@ class RecievedController < ApplicationController
     messages=Message.where(:tousername => @user.username)
     @messages=messages.where(:flag=>false).page(params[:page]).order(:created_at)
     @number=@messages.where(:mark=>false).count
+    @count=0
   end
 
   def show
