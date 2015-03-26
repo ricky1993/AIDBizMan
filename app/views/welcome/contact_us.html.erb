@@ -1,26 +1,4 @@
 <div class="container">
-  <% unless user_signed_in? %>
-      <div class="masthead">
-        <h3 class="text-muted">AIDSystem</h3>
-        <nav>
-          <ul class="nav nav-justified">
-            <li><%= link_to "主页",welcome_index_path %></li>
-            <li><%= link_to "订单管理" ,new_user_session_path %></li>
-            <li><a href="#">艺术品查询</a></li>
-            <li><a href="#">其他服务</a></li>
-            <li><%= link_to "关于AID",welcome_about_us_path %></li>
-            <li class="active"><%=link_to "联系我们",welcome_contact_us_path %></li>
-          </ul>
-        </nav>
-      </div>
-
-      <style>
-          body{
-              background-image:url(<%=image_path("c.jpg")%>);
-              background-position: center;
-          }
-      </style>
-  <% end %>
 
 <div id="templatemo_content_wrapper" style="padding-left:0px;">
   <br />

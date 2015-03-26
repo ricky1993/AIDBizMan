@@ -8,6 +8,7 @@
   <% end %>
 </div>
 
+
     <div>
     <%= form_tag(find_findApply_path,:class=>"form-horizontal",:method => :get,) do %>
           <div class="row">
@@ -27,7 +28,9 @@
     <hr />
     </div>
 
-    <h2 class="page-header">未完成订单</h2>
+
+
+    <h2 class="page-header">处理中订单</h2>
  <table class="table table-bordered">
   <thead>
     <tr>
@@ -66,7 +69,7 @@
           <%= link_to "详细信息", apply_record_path(apply_record),
                      :class => 'btn btn-default btn-xs' %>
           <% if (apply_record.state=="等待处理" && current_user.job=="客服人员")||current_user.admin %>
-          <%= link_to "编辑",
+          <%= link_to "o编辑",
                       edit_apply_record_path(apply_record), :class => 'btn btn-default btn-xs' %>
           <%= link_to "删除",
                       apply_record_path(apply_record),                :method => :delete,
@@ -95,6 +98,3 @@
             :class => 'btn btn-primary' %>
 <% end %>
 <% end %>
-
-
-

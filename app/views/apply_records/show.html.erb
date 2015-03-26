@@ -3,100 +3,124 @@
   <h1>订单详细信息</h1>
 </div>
 
-<div class="panel panel-primary">
-<dl>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:订单号) %>:<span class="text-primary"><%= @apply_record.dingdanhao %></span></h4></dt>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:创建日期) %>:<span class="text-primary"><%= @apply_record.created_at.localtime.to_s(:db) %></span> </h4></dt>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:申请人姓名) %>:<span class="text-primary"><%= @apply_record.personname %></span> </h4></dt>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:申请人类别) %>:<span class="text-primary"><%= @apply_record.personcategory %></span> </h4></dt>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:申请项目) %>:<span class="text-primary"><%= @apply_record.item %></span> </h4></dt>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:艺术品类别) %>:<span class="text-primary"><%= @apply_record.artcategory %></h4></dt>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:艺术品名称) %>:<span class="text-primary"><%= @apply_record.artname %></h4></dt>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:入库日期) %>:<span class="text-primary"><% if @apply_record.intime!=nil %>
+
+
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  基本信息
+</button>
+<div class="collapse" id="collapseExample">
+  <div class="well">
+    <p><%= model_class.human_attribute_name(:订单号) %>:<span class="text-primary"><%= @apply_record.dingdanhao %></span></p>
+    <p><%= model_class.human_attribute_name(:创建日期) %>:<span class="text-primary"><%= @apply_record.created_at.localtime.to_s(:db) %></span> </p>
+    <p><%= model_class.human_attribute_name(:申请人姓名) %>:<span class="text-primary"><%= @apply_record.personname %></span> </p>
+    <p><%= model_class.human_attribute_name(:申请人类别) %>:<span class="text-primary"><%= @apply_record.personcategory %></span></p>
+    <p><%= model_class.human_attribute_name(:申请项目) %>:<span class="text-primary"><%= @apply_record.item %></span></p>
+    <p><%= model_class.human_attribute_name(:艺术品类别) %>:<span class="text-primary"><%= @apply_record.artcategory %></p>
+  </div>
+</div>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+  操作日期
+</button>
+<div class="collapse" id="collapseExample1">
+  <div class="well">
+    <p><%= model_class.human_attribute_name(:入库日期) %>:<span class="text-primary"><% if @apply_record.intime!=nil %>
       <%= @apply_record.intime.localtime.to_s(:db) %>
   <% else %>
       <%= @apply_record.intime %>
-  <% end %></span> </h4></dt>
+  <% end %></span> </p>
 
 
-  <% if @apply_record.state=="申请不通过" %>
-      <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:申请不通过日期) %>:<span class="text-primary"><% if @apply_record.shenqingtime!=nil %>
+    <% if @apply_record.state=="申请不通过" %>
+        <p><%= model_class.human_attribute_name(:申请不通过日期) %>:<span class="text-primary"><% if @apply_record.shenqingtime!=nil %>
       <%= @apply_record.shenqingtime.localtime.to_s(:db) %>
   <% else %>
       <%= @apply_record.shenqingtime %>
-  <% end %></span> </h4></dt>
-  <% else %>
-      <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:申请通过日期) %>:<span class="text-primary"><% if @apply_record.shenqingtime!=nil %>
+  <% end %></span> </p>
+    <% else %>
+        <p><%= model_class.human_attribute_name(:申请通过日期) %>:<span class="text-primary"><% if @apply_record.shenqingtime!=nil %>
       <%= @apply_record.shenqingtime.localtime.to_s(:db) %>
   <% else %>
       <%= @apply_record.shenqingtime %>
-  <% end %></span> </h4></dt>
-  <% end %>
+  <% end %></span> </p>
+    <% end %>
 
 
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:送往采样日期) %>:<span class="text-primary"><% if @apply_record.sampletime!=nil %>
+    <p><%= model_class.human_attribute_name(:送往采样日期) %>:<span class="text-primary"><% if @apply_record.sampletime!=nil %>
       <%= @apply_record.sampletime.localtime.to_s(:db) %>
   <% else %>
       <%= @apply_record.sampletime %>
-  <% end %></span> </h4></dt>
+  <% end %></span> </p>
 
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:采样完成归还日期) %>:<span class="text-primary"> <% if @apply_record.returntime!=nil %>
+    <p><%= model_class.human_attribute_name(:采样完成归还日期) %>:<span class="text-primary"> <% if @apply_record.returntime!=nil %>
       <%= @apply_record.returntime.localtime.to_s(:db) %>
   <% else %>
       <%= @apply_record.returntime %>
-  <% end %></span> </h4></dt>
+  <% end %></span> </p>
 
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:出库日期) %>:<span class="text-primary"><% if @apply_record.outtime!=nil %>
+    <p><%= model_class.human_attribute_name(:出库日期) %>:<span class="text-primary"><% if @apply_record.outtime!=nil %>
       <%= @apply_record.outtime.localtime.to_s(:db) %>
   <% else %>
       <%= @apply_record.outtime %>
-  <% end %></span> </h4></dt>
+  <% end %></span></p>
 
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:证书打印日期) %>:<span class="text-primary"> <% if @apply_record.printtime!=nil %>
+    <p><%= model_class.human_attribute_name(:证书打印日期) %>:<span class="text-primary"> <% if @apply_record.printtime!=nil %>
       <%= @apply_record.printtime.localtime.to_s(:db) %>
   <% else %>
       <%= @apply_record.printtime %>
-  <% end %></span> </h4></dt>
+  <% end %></span></p>
 
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:证书签发日期) %>:<span class="text-primary"><% if @apply_record.issuetime!=nil %>
+    <p><%= model_class.human_attribute_name(:证书签发日期) %>:<span class="text-primary"><% if @apply_record.issuetime!=nil %>
       <%= @apply_record.issuetime.localtime.to_s(:db) %>
   <% else %>
       <%= @apply_record.issuetime %>
-  <% end %></span> </h4></dt>
-
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:操作状态) %>:<span class="text-primary"><%= @apply_record.state %></span> </h4></dt>
-
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:库管状态) %>:<span class="text-primary"><%= @apply_record.state1 %></span></h4></dt>
-
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:订单所属) %>:<span class="text-primary"><%= @apply_record.user %></span></h4></dt>
-
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:作品库管员) %>:<span class="text-primary"><%= @apply_record.itemsave %></span></h4></dt>
-
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:作品备案认证人员) %>:<span class="text-primary"><%= @apply_record.sample %></span></h4></dt>
-
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:草拟证书与发放人员) %>:<span class="text-primary"><%= @apply_record.issue %></span></h4></dt>
-
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:审核意见) %>:<span class="text-primary"><%= @apply_record.advice %></span></h4></dt>
-
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:证件类型) %>:<span class="text-primary"><%= @apply_record.idtype %></span></h4></dt>
-
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:证件号码) %>:<span class="text-primary"><%= @apply_record.idnumber %></span></h4></dt>
-
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:证件图片) %>:</h4></dt>
-  <dd><%= image_tag @apply_record.idimage_url.to_s,:class =>"img-rounded" %></dd>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:作品图片) %>:</h4></dt>
-  <dd><%= image_tag @apply_record.image_url(:thumb).to_s,:class=>"img-rounded" %></dd>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:宏观图片) %>:</h4></dt>
-  <dd><%= image_tag @apply_record.macroimage_url.to_s,:class=>"img-rounded" %></dd>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:微观图片) %>:</h4></dt>
-  <dd><%= image_tag @apply_record.microimage_url.to_s,:class=>"img-rounded" %></dd>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:机器检索编码) %>:</h4></dt>
-  <dd><%= image_tag @apply_record.qrimage_url.to_s,:class=>"img-rounded" %></dd>
-  <dt><h4 class="text-danger"><%= model_class.human_attribute_name(:关联艺术品) %>:</h4></dt>
-  <dd><%= @apply_record.art_works.count %>件(<%= link_to("点击查看详情",{:controller =>'art_works',:action => 'index',:id =>@apply_record.id},:class => "text-danger" )%>)</dd>
-
-</dl>
+  <% end %></span></p>
+  </div>
 </div>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+  操作详情
+</button>
+<div class="collapse" id="collapseExample2">
+  <div class="well">
+    <p><%= model_class.human_attribute_name(:操作状态) %>:<span class="text-primary"><%= @apply_record.state %></span> </p>
+
+    <p><%= model_class.human_attribute_name(:库管状态) %>:<span class="text-primary"><%= @apply_record.state1 %></span></p>
+
+    <p><%= model_class.human_attribute_name(:订单所属) %>:<span class="text-primary"><%= @apply_record.user %></span></p>
+
+    <p><%= model_class.human_attribute_name(:作品库管员) %>:<span class="text-primary"><%= @apply_record.itemsave %></span></p>
+
+    <p><%= model_class.human_attribute_name(:作品备案认证人员) %>:<span class="text-primary"><%= @apply_record.sample %></span></p>
+
+    <p><%= model_class.human_attribute_name(:草拟证书与发放人员) %>:<span class="text-primary"><%= @apply_record.issue %></span></p>
+
+    <p><%= model_class.human_attribute_name(:审核意见) %>:<span class="text-primary"><%= @apply_record.advice %></span></p>
+
+    <p><%= model_class.human_attribute_name(:证件类型) %>:<span class="text-primary"><%= @apply_record.idtype %></span></p>
+
+    <p><%= model_class.human_attribute_name(:证件号码) %>:<span class="text-primary"><%= @apply_record.idnumber %></span></p>
+
+    <p><%= model_class.human_attribute_name(:证件图片) %>:<%= image_tag @apply_record.idimage_url.to_s,:class =>"img-rounded" %></p>
+  </div>
+</div>
+
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
+  相关图片
+</button>
+<div class="collapse" id="collapseExample3">
+  <div class="well">
+    <p><%= model_class.human_attribute_name(:作品图片) %>:</p>
+    <%= image_tag @apply_record.image_url(:thumb).to_s,:class=>"img-rounded" %>
+    <p><%= model_class.human_attribute_name(:宏观图片) %>:</p>
+    <%= image_tag @apply_record.macroimage_url.to_s,:class=>"img-rounded" %>
+    <p><%= model_class.human_attribute_name(:微观图片) %>:</p>
+    <%= image_tag @apply_record.microimage_url.to_s,:class=>"img-rounded" %>
+    <p><%= model_class.human_attribute_name(:机器检索编码) %>:</p>
+    <dd><%= image_tag @apply_record.qrimage_url.to_s,:class=>"img-rounded" %></dd>
+    <p><%= model_class.human_attribute_name(:关联艺术品) %>:</p>
+    <%= @apply_record.art_works.count %>件(<%= link_to("点击查看详情",{:controller =>'art_works',:action => 'index',:id =>@apply_record.id},:class => "text-danger" )%>)
+  </div>
+</div>
+
 
 <% if current_user.job=="客服人员" &&@apply_record.state=="等待处理" %>
     <%= link_to('添加关联艺术品',{:controller =>'art_works',:action => 'new',:id =>@apply_record.id },:class => "btn btn-default")%>

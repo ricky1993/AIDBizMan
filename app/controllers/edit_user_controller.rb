@@ -6,13 +6,13 @@ class EditUserController < ApplicationController
   end
 
   def edit
+    @name=params[:name]
     @user=User.where(:username => params[:name]).first
   end
 
 
 
   def show
-    job=["客服人员","作品库管员","作品备案认证人员","草拟与证书发送人员"]
     @user=User.where(:username => params[:user]).first
     unless params[:realname]==nil
       @user.realname=params[:realname]

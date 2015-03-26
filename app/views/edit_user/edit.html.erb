@@ -29,13 +29,22 @@
       <% end %>
     </div>
     <% end %>
-    <% if current_user.admin %>
+    <% if current_user.admin && @name!=current_user.username %>
         <div class="form-group">
               <%= label_tag :工作 %><br>
               <%= select_tag(:job,
                              options_for_select(['客服人员','作品库管员','作品备案认证人员','草拟与证书发送人员'])) %>
         </div>
     <% end %>
+
+        <% if current_user.admin && @name==current_user.username %>
+            <div class="form-group">
+              <%= label_tag :工作 %><br>
+              <%= select_tag(:job,
+                             options_for_select(['管理员'])) %>
+            </div>
+        <% end %>
+
     <% if current_user==@user %>
     <div class="form-group">
       <%= label_tag :手机号码 %><br>

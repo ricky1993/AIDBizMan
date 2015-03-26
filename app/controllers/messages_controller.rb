@@ -8,7 +8,12 @@ class MessagesController < ApplicationController
   def index
     @user=current_user
     @messages = current_user.message.where(:flag=>true).page(params[:page]).order(:created_at)
-    @count=0
+    a=params[:page].to_i
+    if a==0
+      @count=0
+    else
+      @count=(a-1)*10
+    end
   end
 
   # GET /messages/1

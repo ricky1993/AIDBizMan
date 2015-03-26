@@ -9,7 +9,7 @@ class WelcomeController < ApplicationController
       elsif User.count>1 && current_user.job==nil
         redirect_to :controller => "edit_user",:action=>"edit",:name=>current_user.username
       else
-        redirect_to :controller => "apply_records",:action => "index",:name=>current_user.username
+        redirect_to :controller => "common",:action => "index",:name=>current_user.username
       end
     end
   end

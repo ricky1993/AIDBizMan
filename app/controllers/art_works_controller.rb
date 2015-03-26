@@ -8,8 +8,14 @@ class ArtWorksController < ApplicationController
   def index
     @apply_record=ApplyRecord.find(params[:id])
     @art_works = @apply_record.art_works.order(:created_at=>:desc).page(params[:page])
-    @count=0
+    a=params[:page].to_i
+    if a==0
+      @count=0
+    else
+      @count=(a-1)*10
+    end
   end
+
 
   # GET /art_works/1
   # GET /art_works/1.json

@@ -31,7 +31,7 @@ class FindController < ApplicationController
       apply_records=apply_records.where("created_at >= :start_date AND created_at <= :end_date", {start_date: start_time, end_date: end_time})
     end
 
-    if params[:tousername]!=nil
+    if params[:tousername]!=""
       user=User.where(:username => params[:tousername]).first
       if user.job=="客服人员"
         apply_records=apply_records.where(:user=>user.username)
@@ -46,8 +46,16 @@ class FindController < ApplicationController
       end
     end
 
+    @numbers=apply_records.count
     @apply_records=apply_records.page(params[:page]).order(:created_at=>:desc)
     @users=users.page(params[:page]).order(:created_at=>:asc)
+
+    a=params[:page].to_i
+    if a==0
+      @count=0
+    else
+      @count=(a-1)*10
+    end
 
   end
 

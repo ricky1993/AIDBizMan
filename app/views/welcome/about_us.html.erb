@@ -1,26 +1,4 @@
 <div class="container">
-<% unless user_signed_in? %>
-    <div class="masthead">
-      <h3 class="text-muted">AIDSystem</h3>
-      <nav>
-        <ul class="nav nav-justified">
-          <li><a href="#">主页</a></li>
-          <li><%= link_to "订单管理" ,new_user_session_path %></li>
-          <li><a href="#">艺术品查询</a></li>
-          <li><a href="#">其他服务</a></li>
-          <li class="active"><%= link_to "关于AID",welcome_about_us_path %></li>
-          <li><%=link_to "联系我们",welcome_contact_us_path %></li>
-        </ul>
-      </nav>
-    </div>
-
-    <style>
-        body{
-            background-image:url(<%=image_path("c.jpg")%>);
-            background-position: center;
-        }
-    </style>
-<% end %>
 
 <div id="templatemo_content_wrapper">
 
@@ -50,7 +28,11 @@
     <p style="font-size:14px;">
       &nbsp;&nbsp;&nbsp;&nbsp; 上海交通大学硕士，拥有多年的软件开发及项目管理经验，对于 IT 架构、计算机软件、网络、数据库及数字图像处理等系统的开                发和维护有自己独特的见解。曾在多个软件开发项目中担任领队，2005-2007年在上海圣途教育咨询公司担任技术经理期间，独立完                成了公司所有软件产品的设计与架构。
     </p>
+    <p style="font-size:14px;">
+      &nbsp;&nbsp;&nbsp;&nbsp; 上海交通大学硕士，拥有多年的软件开发及项目管理经验，对于 IT 架构、计算机软件、网络、数据库及数字图像处理等系统的开                发和维护有自己独特的见解。曾在多个软件开发项目中担任领队，2005-2007年在上海圣途教育咨询公司担任技术经理期间，独立完                成了公司所有软件产品的设计与架构。
+    </p>
   </div>
+
   <!-- end of templatemo_content -->
 
   <div class="cleaner"></div>

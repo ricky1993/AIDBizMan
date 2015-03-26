@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'common/index'
+
+  get 'common/unhandled'
+
   get 'welcome/index'
 
   get 'welcome/about_us'
@@ -35,9 +39,9 @@ Rails.application.routes.draw do
   get 'edit_user/handle'
 
 
-  devise_for :users do
-    root 'apply_records#index'
-  end
+  devise_for :users
+
+
   resources :apply_records
 
   get 'apply_records/find'
