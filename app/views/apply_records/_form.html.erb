@@ -26,7 +26,7 @@
         <div class="control-group">
           <%= f.label :申请人类别, :class => 'control-label' %>
           <div class="controls">
-            <%= f.select :personcategory,['艺术家','藏家','艺术机构'] %>
+            <%= f.select :personcategory,['艺术家','藏家','艺术机构','其他'] %>
           </div>
           <%= error_span(@apply_record[:personcategory]) %>
         </div>
@@ -40,7 +40,7 @@
         <div class="control-group">
           <%= f.label :艺术品类别, :class => 'control-label' %>
           <div class="controls">
-            <%= f.text_field :artcategory, :class => 'form-control' %>
+            <%= f.select :artcategory,['书法','绘画','其他'] %>
           </div>
           <%= error_span(@apply_record[:artcategory]) %>
         </div>
@@ -64,7 +64,7 @@
         <div class="control-group">
           <%= f.label :证件类型, :class => 'control-label' %>
           <div class="controls">
-            <%= f.select :idtype,['身份证','组织机构代码证','营业执照'],  :class => 'form-control' %>
+            <%= f.select :idtype,['身份证','组织机构代码证','营业执照','其他'],  :class => 'form-control' %>
           </div>
           <%= error_span(@apply_record[:idtype]) %>
         </div>

@@ -2,5 +2,8 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="Rails AIDSystem: development" uuid="d7ac1416-3ffe-4a0e-b636-a3f8658a0acf" />
+    <data-source name="Rails AIDSystem: production" uuid="20430b70-4493-4d92-872e-99aa46c4253b">
+      <first-sync>true</first-sync>
+    </data-source>
   </component>
 </project>

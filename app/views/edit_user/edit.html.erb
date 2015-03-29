@@ -23,7 +23,7 @@
     <% unless current_user.admin %>
     <div class="form-group">
       <% if current_user.job==nil or @user.job=="客服人员" %>
-         <%= label_tag :工作 %><br>
+         <%= label_tag :岗位 %><br>
          <%= select_tag(:job,
                      options_for_select(['客服人员'])) %>
       <% end %>
@@ -31,7 +31,7 @@
     <% end %>
     <% if current_user.admin && @name!=current_user.username %>
         <div class="form-group">
-              <%= label_tag :工作 %><br>
+              <%= label_tag :岗位 %><br>
               <%= select_tag(:job,
                              options_for_select(['客服人员','作品库管员','作品备案认证人员','草拟与证书发送人员'])) %>
         </div>
@@ -39,7 +39,7 @@
 
         <% if current_user.admin && @name==current_user.username %>
             <div class="form-group">
-              <%= label_tag :工作 %><br>
+              <%= label_tag :岗位 %><br>
               <%= select_tag(:job,
                              options_for_select(['管理员'])) %>
             </div>
