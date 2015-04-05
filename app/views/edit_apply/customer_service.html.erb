@@ -1,0 +1,108 @@
+<%- model_class = ApplyRecord -%>
+<div class="page-header">
+  <h1>订单详情</h1>
+</div>
+<%= form_for @apply_record, :html => { :class => "form-horizontal apply_record" ,:multipart=>true } do |f| %>
+
+    <% if @apply_record.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@apply_record.errors.count, "error") %> prohibited this apply_record from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @apply_record.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :申请人姓名, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :personname, :class => 'form-control' %>
+      </div>
+      <%= error_span(@apply_record[:personname]) %>
+    </div>
+    <div class="control-group">
+      <%= f.label :申请人类别, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :personcategory,['艺术家','藏家','艺术机构','其他'] %>
+      </div>
+      <%= error_span(@apply_record[:personcategory]) %>
+    </div>
+    <div class="control-group">
+      <%= f.label :申请项目, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :item,['备案','认证'] %>
+      </div>
+      <%= error_span(@apply_record[:item]) %>
+    </div>
+    <div class="control-group">
+      <%= f.label :艺术品类别, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :artcategory,['书法','绘画','其他'] %>
+      </div>
+      <%= error_span(@apply_record[:artcategory]) %>
+    </div>
+    <div class="control-group">
+      <%= f.label :艺术品名称, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :artname, :class => 'form-control' %>
+      </div>
+      <%= error_span(@apply_record[:artname]) %>
+    </div>
+    <div class="control-group">
+      <hr />
+      <p>上传作品图片</p>
+      <div class="controls">
+        <%= f.file_field :image %>
+        <%= f.hidden_field :image_cache %>
+      </div>
+      <%= error_span(@apply_record[:image]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :证件类型, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :idtype,['身份证','组织机构代码证','营业执照','其他'],  :class => 'form-control' %>
+      </div>
+      <%= error_span(@apply_record[:idtype]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :证件号码, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :idnumber, :class => 'form-control' %>
+      </div>
+      <%= error_span(@apply_record[:idnumber]) %>
+    </div>
+
+    <div class="control-group">
+      <hr />
+      <p>证件图片</p>
+      <div class="controls">
+        <%= f.file_field :idimage %>
+        <%= f.hidden_field :idimage_cache %>
+          </div>
+      <%= error_span(@apply_record[:idimage]) %>
+    </div>
+
+
+    <div class="control-group">
+      <%= f.label :操作状态, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :state, ['申请通过','申请不通过'],include_blank: true,:class => 'form-control' %>
+      </div>
+      <%= error_span(@apply_record[:state]) %>
+    </div>
+    <div class="control-group">
+      <%= f.label :审核意见, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :advice, :class => 'form-control',size:"20x5" %>
+      </div>
+      <%= error_span(@apply_record[:advice]) %>
+    </div>
+<% end %>

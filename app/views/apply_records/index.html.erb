@@ -69,20 +69,24 @@
           <%= link_to "详细信息", apply_record_path(apply_record),
                      :class => 'btn btn-default btn-xs' %>
           <% if (apply_record.state=="等待处理" && current_user.job=="客服人员")||current_user.admin %>
-          <%= link_to "o编辑",
-                      edit_apply_record_path(apply_record), :class => 'btn btn-default btn-xs' %>
+          <%= link_to "编辑",
+                      {:controller =>'edit_apply',:action => 'customer_service',:id => apply_record.id}, :class => 'btn btn-default btn-xs' %>
           <%= link_to "删除",
                       apply_record_path(apply_record),                :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '确定删除订单?')) },
                       :class => 'btn btn-xs btn-danger' %>
           <% end %>
-          <% if current_user.job!="客服人员" && current_user.job!="草拟与证书发送人员" %>
+          <% if current_user.job=="作品库管员" %>
               <%= link_to "编辑",
-                          edit_apply_record_path(apply_record), :class => 'btn btn-default btn-xs' %>
+                          {:controller =>'edit_apply',:action => 'storage',:dingdanhao => apply_record.dingdanhao}, :class => 'btn btn-default btn-xs' %>
+          <% end %>
+          <% if current_user.job=="作品备案认证人员" %>
+              <%= link_to "编辑",
+                          {:controller =>'edit_apply',:action => 'sample',:dingdanhao => apply_record.dingdanhao}, :class => 'btn btn-default btn-xs' %>
           <% end %>
           <% if current_user.job=="草拟与证书发送人员" %>
               <%= link_to "编辑",
-                          edit_apply_record_path(apply_record), :class => 'btn btn-default btn-xs' %>
+                          {:controller =>'edit_apply',:action => 'issue',:dingdanhao => apply_record.dingdanhao}, :class => 'btn btn-default btn-xs' %>
           <% end %>
         </td>
       </tr>

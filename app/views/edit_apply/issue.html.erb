@@ -1,0 +1,57 @@
+<%- model_class = ApplyRecord -%>
+<div class="page-header">
+  <h1>订单详情</h1>
+</div>
+<%= form_for @apply_record, :html => { :class => "form-horizontal apply_record" ,:multipart=>true } do |f| %>
+
+    <% if @apply_record.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@apply_record.errors.count, "error") %> prohibited this apply_record from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @apply_record.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+    <% end %>
+
+
+    <% if current_user.job=="草拟与证书发送人员" %>
+        <div class="control-group">
+          <%= f.label :操作状态, :class => 'control-label' %>
+          <div class="controls">
+            <% if @apply_record.isprint=='已打印'&&@apply_record.isissue=='已签发'&&@apply_record.paid=='已缴费' %>
+                <%= f.select :state,['证书签发完毕'] %>
+            <% else %>
+                <%= f.select :state,['证书签发中'] %>
+            <% end %>
+          </div>
+          <%= error_span(@apply_record[:state]) %>
+        </div>
+        <div class="control-group">
+          <%= f.label :打印状态, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select :isprint,['未打印','已打印'] %>
+          </div>
+          <%= error_span(@apply_record[:paid]) %>
+        </div>
+        <div class="control-group">
+          <%= f.label :签发状态, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select :isissue,['未签发','已签发'] %>
+          </div>
+          <%= error_span(@apply_record[:paid]) %>
+        </div>
+        <div class="control-group">
+          <%= f.label :缴费状态, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select :paid,['未缴费','已缴费'] %>
+          </div>
+          <%= error_span(@apply_record[:paid]) %>
+        </div>
+    <% end %>
+<% end %>

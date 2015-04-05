@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   get 'edit_user/handle'
 
+  get 'edit_apply/customer_service'
 
   devise_for :users
 

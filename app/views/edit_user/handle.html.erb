@@ -8,6 +8,8 @@
     <p class="text-danger">当前用户为作品备案认证人员，以下是其备案认证的订单</p>
 <% elsif @user.job=="草拟与证书发送人员" %>
     <p class="text-danger">当前用户为草拟与证书发送人员，以下是其发放证书的订单</p>
+<% elsif @user.job=="业务经理" %>
+    <p class="text-danger">当前用户为业务经理，以下是其可查看的订单</p>
 <% end %>
     <table class="table table-striped" border="1.0">
       <thead>

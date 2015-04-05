@@ -1,0 +1,36 @@
+<%- model_class = ApplyRecord -%>
+<div class="page-header">
+  <h1>订单详情</h1>
+</div>
+<%= form_for @apply_record, :html => { :class => "form-horizontal apply_record" ,:multipart=>true } do |f| %>
+
+    <% if @apply_record.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@apply_record.errors.count, "error") %> prohibited this apply_record from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @apply_record.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+    <% end %>
+
+
+    <% if current_user.job=="作品库管员" %>
+        <div class="control-group">
+          <%= f.label :操作状态, :class => 'control-label' %>
+          <div class="controls">
+            <% if @apply_record.state!="采样完毕" %>
+                <%= f.select :state,['物品交接中','物品已入库','物品送往备案'] %>
+            <% else %>
+                <%= f.select :state1,['备案物品归还','物品已出库'] %>
+            <% end %>
+          </div>
+          <%= error_span(@apply_record[:state]) %>
+        </div>
+    <% end %>
+<% end %>

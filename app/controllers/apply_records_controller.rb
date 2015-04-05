@@ -7,7 +7,9 @@ class ApplyRecordsController < ApplicationController
     if current_user.admin
       redirect_to :controller => "admin",:action => "index"
     end
-    if current_user.job=="客服人员"
+    if current_user.job == "业务经理"
+      @apply_records = ApplyRecord.all.page(params[:page]).order(:created_at=>:desc)
+    elsif current_user.job=="客服人员"
       apply_records = ApplyRecord.where(:user => current_user.username).page(params[:page]).order(:created_at=>:desc)
       @apply_records = apply_records.where.not(:state=>"证书签发完毕").page(params[:page]).order(:created_at=>:desc)
     elsif current_user.job=="作品库管员"
@@ -67,6 +69,9 @@ class ApplyRecordsController < ApplicationController
 
   # GET /apply_records/1/edit
   def edit
+    if current_user.admin
+      redirect_to :controller => "edit_apply",:action => "customer_service"
+    end
   end
 
   # POST /apply_records
@@ -79,7 +84,7 @@ class ApplyRecordsController < ApplicationController
     end
     @apply_record.save
     b=@apply_record.created_at.localtime.to_s(:db)
-    str= b[0..3]+ b[5..6]+ b[8..9]+ b[11..12]+ b[14..15]+ b[17..18]+@apply_record.id.to_s
+    str= "sjdaid"+ b[5..6]+ b[8..9]+ b[11..12]+ b[14..15]+ b[17..18]+@apply_record.id.to_s
     @apply_record.dingdanhao=str
 
 
